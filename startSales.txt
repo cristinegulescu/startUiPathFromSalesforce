@@ -1,0 +1,76 @@
+public class startuipath 
+        {
+            @future(callout=true)
+            public static void startProcess(String param1,String param2)
+            {
+                Http http = new Http();
+                HttpRequest rm = new HttpRequest();
+                rm.setEndpoint('https://account.uipath.com/oauth/token');
+                rm.setMethod('POST');
+                rm.setHeader('Content-Type', 'application/json');
+                rm.setHeader('X-UIPATH-TenantName', 'YOUR TENANT');
+                rm.setTimeout(60000);
+
+                JSONGenerator gen = JSON.createGenerator(true);   
+                gen.writeStartObject();
+                gen.writeStringField('grant_type','refresh_token');
+                gen.writeStringField('client_id','YOUR CLIENT ID');
+                gen.writeStringField('refresh_token','YOUR REFRESH TOKEN');
+                gen.writeEndObject();
+                rm.setBody(gen.getAsString());
+
+                HttpResponse rs = http.send(rm);
+
+                System.debug(rs.getBody());
+
+                Map<String,Object> res = (Map<String,Object>)JSON.deserializeUntyped(rs.getBody());
+                System.debug(String.valueOf(res.get('access_token')));
+
+                HttpRequest rm2 = new HttpRequest();
+                rm2.setMethod('POST');
+              rm2.setEndpoint('https://platform.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs');
+                rm2.setHeader('Content-Type', 'application/json');
+                rm2.setHeader('X-UIPATH-TenantName', 'YOUR TENANT');
+                rm2.setHeader('Authorization', 'Bearer '+String.valueOf(res.get('access_token')));
+                rm2.setTimeout(60000);
+
+                JSONGenerator gen2 = JSON.createGenerator(true);   
+               /// start a simple process without parameters
+               /* gen2.writeStartObject();
+                gen2.writeFieldName('startInfo');
+                gen2.writeStartObject();
+                gen2.writeStringField('ReleaseKey','YOUR release KEY for process see the YouTube movie below');
+                gen2.writeStringField('Strategy','All');
+                gen2.writeEndObject();
+                gen2.writeEndObject();*/
+
+               /// start a simple process with parameters        
+                gen2.writeStartObject();
+                gen2.writeFieldName('startInfo');
+                gen2.writeStartObject();
+                gen2.writeStringField('ReleaseKey','YOUR release KEY for process see the YouTube movie below');
+                gen2.writeStringField('Strategy','All');
+                gen2.writeStringField('InputArguments','{\"param1\":\"'+param1+'\",\"param2\":\"'+param2+'\"}');
+                gen2.writeEndObject();
+                gen2.writeEndObject();
+
+                rm2.setBody(gen2.getAsString());
+
+                HttpResponse rs2 = http.send(rm2);
+
+                System.debug(rs2.getBody());
+            }
+        }
+		
+trigger TrigOpp on Opportunity (after update,after insert) 
+{   
+    for(Opportunity opp : Trigger.new)
+    {
+        //if (opp.IsClosed == true)
+        System.debug('ouside');
+        if (opp.StageName == 'Closed Won') 
+        {              
+            startuipath.startProcess(opp.Name,opp.Description);
+        }
+    }
+}
