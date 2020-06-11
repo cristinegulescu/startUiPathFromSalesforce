@@ -1,0 +1,70 @@
+define(['N/record','N/https'],function(record,https) {
+    /**          
+     * @NApiVersion 2.x
+     * @NModuleScope Public
+     * @NScriptType ClientScript
+     */
+    var exports = {};
+    function pageInit(context) {  
+    var rec = context.currentRecord;
+    var ID=rec.getValue('entityid');
+    var email=rec.getValue('email');    
+    var postData={"grant_type":"refresh_token",
+                  "client_id":"YOUR CLIENT ID",
+                  "refresh_token":"YOUR REFRESH TOKEN"};
+    postData=JSON.stringify(postData);    
+    var header = { "X-UIPATH-TenantName":"YOUR TENANTNAME", 
+                        "Content-Length": "0", 
+                        "Content-Type": "application/json" };
+    var apiURL='https://account.uipath.com/oauth/token';    
+    var auth="";
+    try{
+      var response=https.post({
+        url:apiURL,
+        headers:header,
+        body:postData
+      });
+      var bodyS=response.body;
+      auth = bodyS.substring(bodyS.indexOf("access_token")+15, bodyS.indexOf("id_token")-3);
+      //alert("Auth:"+auth);
+    }
+    catch(er02){
+      alert("Error Auth: "+er02);     
+      log.error('ERROR AUTH:',JSON.stringify(er02));
+    }
+
+    /*  Start simple process without parameters
+    var postData2={
+    "startInfo": {
+        "ReleaseKey": "YOUR PROCESS ReleaseKey",
+        "Strategy": "All"
+    }
+};*/
+    var postData2={
+    "startInfo": {
+        "ReleaseKey": "YOUR PROCESS ReleaseKey",
+        "Strategy": "All",
+        "InputArguments": "{\"param1\":\""+ID+"\",\"param2\":\""+email+"\"}"
+    }
+};
+    postData2=JSON.stringify(postData2);    
+    var header2 = { "X-UIPATH-TenantName":"YOUR TENANTNAME", 
+                    "Authorization":"Bearer "+auth,
+                        "Content-Length": "0", 
+                        "Content-Type": "application/json" };
+    var apiURL2='https://platform.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs';  
+    try{
+      var response2=https.post({
+        url:apiURL2,
+        headers:header2,
+        body:postData2
+      });      
+    }
+    catch(er03){
+      alert("Error send CMD: "+er03);     
+      log.error('ERROR CMD',JSON.stringify(er03));
+    }
+    }
+    exports.pageInit = pageInit;
+    return exports;
+});
