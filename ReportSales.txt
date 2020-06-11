@@ -1,0 +1,78 @@
+public class UiPathCall {
+    @InvocableMethod(label='UiPath Call')
+    public static List<String> GetReportFilter(List<String> vals)
+    {                
+        String ReportName = vals[0];
+        List <Report> reportList = [SELECT Id,Name FROM Report where Name =:ReportName];
+        String reportId = (String)reportList.get(0).get('Id');        
+        Reports.ReportDescribeResult describe = Reports.ReportManager.describeReport(reportId);
+        Reports.ReportMetadata reportMd = describe.getReportMetadata();        
+        Integer cnt=0;
+        for(String s : vals)
+        {
+            if (cnt!=0)
+            {
+                Reports.ReportFilter filter = reportMd.getReportFilters()[cnt-1];
+                filter.setValue(s);
+            }
+            cnt++;
+        }       
+        Reports.ReportInstance instance = Reports.ReportManager.runAsyncReport(reportId, reportMd,true);        
+        List<String> ToRet = new List<String>();
+        ToRet.add(instance.getId());
+        ToRet.add(reportId);
+        return ToRet;
+    }
+}
+
+public class UiPathCheck {
+    @InvocableMethod(label='UiPath Check')
+    public static List<String> Check(List<String> vals)
+    {
+        Reports.ReportInstance reportInstance = Reports.ReportManager.getReportInstance(vals[0]);        
+        List<String> ToRet = new List<String>();
+        ToRet.add(reportInstance.getStatus());                
+        return ToRet;        
+    }
+}
+
+public class UiPathResult {
+    @InvocableMethod(label='UiPath Result')   
+    public static List<String> ResultFunction(List<String> vals)
+    {
+        List<String> ReturnList = new List<String>();
+        Reports.ReportInstance reportInstance = Reports.ReportManager.getReportInstance(vals[0]);
+        Reports.reportResults results = reportInstance.getReportResults();
+        String factMapKey = 'T!T';
+        Reports.ReportFactWithDetails factDetails =
+            (Reports.ReportFactWithDetails)results.getFactMap().get(factMapKey);
+        for(Reports.ReportDetailRow detailRow : factDetails.getRows())
+        {           
+            ReturnList.add(detailRow.getDataCells()[2].getLabel());
+            ReturnList.add(detailRow.getDataCells()[3].getLabel());
+        }           
+        return ReturnList;  
+//Some Example for grouping
+//Reports.Dimension dim = results.getGroupingsDown();
+//Reports.GroupingValue groupingVal = dim.getGroupings()[0];
+//System.debug('Key: ' + groupingVal.getKey());
+//System.debug('Label: ' + groupingVal.getLabel());
+//System.debug('Value: ' + groupingVal.getValue());
+// Construct a fact map key, using the grouping key value
+//String factMapKey = groupingVal.getKey() + '!T';*/
+    }
+}
+
+// just help CODE to get the order of the filters
+/*public static void GetListFields()
+    {
+        List <Report> reportList = [SELECT Id,Name FROM Report where Name = 'CristiReport'];
+        String reportId = (String)reportList.get(0).get('Id');        
+        Reports.ReportDescribeResult describe = Reports.ReportManager.describeReport(reportId);
+        Reports.ReportMetadata reportMd = describe.getReportMetadata();
+        for(Reports.ReportFilter rf : reportMd.getReportFilters())
+        {
+            System.debug('Filter Name: '+rf.getcolumn());
+            System.debug('Filter Value: '+rf.getValue());
+        }       
+    }*/
