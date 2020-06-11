@@ -1,0 +1,60 @@
+///////////////////////// index.html 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/UiPathRobot.js"></script> 
+<!--<script src="https://uipathrobot.azureedge.net/Latest/UiPathRobot.js"></script>--> 
+</head>
+<body>
+    <button id="bt1" onclick="startSimple()">Start Simple Process</button>      
+    <button id="bt2" onclick="startParam()">Start Process with Parameter</button> 
+</body>
+</html>
+
+/////////////////////////// app.js
+
+function startSimple()
+{
+    UiPathRobot.init(10);
+    UiPathRobot.getProcesses().then(processes => 
+    {    
+        let process = processes.find(p => p.name.includes('MsgBox'));
+        process.start().then(result => 
+        {
+            console.log('ok');
+        }, err => {
+            console.log(err);
+        })
+    }, err => {
+        console.log(err);
+    });
+    //alert('startx');
+}
+function startParam()
+{
+    let arguments =
+    {
+        "param1":"test fro video1 tests",
+        "param2":"Helllo fromm JS aopp"
+    };
+    UiPathRobot.init(10);
+    UiPathRobot.getProcesses().then(processes => 
+    {    
+        let process = processes.find(p => p.name.includes('MsgBoxParam'));
+        process.start(arguments).then(result => 
+        {
+            //console.log('ok');
+            alert(result.retresult);
+        }, err => {
+            console.log(err);
+        })
+    }, err => {
+        console.log(err);
+    });
+    //alert('startx');
+}
+
+//////////////////////////// CMD from PowerShell
+PS C:\Program Files (x86)\IIS Express> .\iisexpress.exe /path:C:\Web3 /port:8000
