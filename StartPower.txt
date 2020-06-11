@@ -1,0 +1,40 @@
+///GET AUTHORIZATION CMD
+https://account.uipath.com/oauth/token
+Content-Type          application/json
+X-UIPATH-TenantName   YOUR TENANTNAME
+///Body for the command
+{
+    "grant_type": "refresh_token",
+    "client_id": "YOUR CLIENT ID",
+    "refresh_token": "YOUR REFRESH TOKEN"
+}
+///Train code for parse JSON 
+{
+    "access_token": "test",
+    "id_token": "test",
+    "scope": "test",
+    "expires_in": 86400,
+    "token_type": "Bearer"
+}
+
+/// SEND START JOB CMD
+https://platform.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs
+Authorization 
+Bearer VariableFromAuthCMD
+///Simple process Body
+
+{
+    "startInfo": {
+        "ReleaseKey": "YOUR PROCESS ReleaseKey",
+        "Strategy": "All"
+    }
+}
+
+///Process with Parameters
+{
+    "startInfo": {
+        "ReleaseKey": "YOUR PROCESS ReleaseKey",
+        "Strategy": "All",
+        "InputArguments": "{\"param1\":\"P1\",\"param2\":\"P2\"}"
+    }
+}
