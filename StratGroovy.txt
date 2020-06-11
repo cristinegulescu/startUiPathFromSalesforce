@@ -1,0 +1,55 @@
+def builder = new groovy.json.JsonBuilder();
+def root = builder{
+                    grant_type 'refresh_token'
+                    client_id 'YOUR CLIENT ID'
+                    refresh_token 'YOUR REFRESH TOKEN'
+                 }
+assert root instanceof Map
+
+def link = new URL("https://account.uipath.com/oauth/token");
+def connection = link.openConnection() as HttpURLConnection;
+
+connection.setRequestProperty("Content-Type","application/json");
+connection.setRequestProperty("X-UIPATH-TenantName","YOUR TENANTNAME");
+connection.setDoOutput(true);
+
+def httpRequestBodyWriter = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()))
+httpRequestBodyWriter.write(builder)
+httpRequestBodyWriter.close()
+def auth = "0"
+if(connection.responseCode == 200)
+{
+    def resp = connection.inputStream.text
+    auth = resp.substring(resp.indexOf("access_token")+15,resp.indexOf("id_token")-3)    
+    println resp
+}
+
+def builder2 = new groovy.json.JsonBuilder();
+//process without parameters
+/*def root2 = builder2.startInfo {
+                    ReleaseKey 'YOUR PROCESS ReleaseKey'
+                    Strategy 'All'
+                 }*/
+//process with parameters
+def root2 = builder2.startInfo {
+                    ReleaseKey 'YOUR PROCESS ReleaseKey'
+                    Strategy 'All'
+                    InputArguments '{"param1":"Test Youtube","param2":"GroovyConsole"}'
+                 }
+assert root2 instanceof Map
+
+def link2 = new URL("https://platform.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs");
+def connection2 = link2.openConnection() as HttpURLConnection;
+
+connection2.setRequestProperty("Authorization",'Bearer '+auth);
+connection2.setRequestProperty("Content-Type","application/json");
+connection2.setRequestProperty("X-UIPATH-TenantName","YOUR TENANTNAME");
+connection2.setRequestProperty("User-Agent","telnet");
+connection2.setDoOutput(true);
+
+def httpRequestBodyWriter2 = new BufferedWriter(new OutputStreamWriter(connection2.getOutputStream()))
+httpRequestBodyWriter2.write(builder2)
+httpRequestBodyWriter2.close()
+
+   println connection2.responseCode
+   println connection2.responseMessage   
