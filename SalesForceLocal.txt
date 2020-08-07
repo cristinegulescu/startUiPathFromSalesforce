@@ -1,0 +1,36 @@
+//start simple process
+{!REQUIRESCRIPT("https://uipathrobot.azureedge.net/Latest/UiPathRobot.js")}
+UiPathRobot.init(10);
+UiPathRobot.getProcesses().then(processes => 
+    {    
+        let process = processes.find(p => p.name.includes('MsgBox'));
+        process.start().then(result => 
+        {
+            alert("OK");
+        }, err => {
+            alert(err);
+        })
+    }, err => {
+        alert(err);
+    });
+	
+//start a process with parameters
+{!REQUIRESCRIPT("https://uipathrobot.azureedge.net/Latest/UiPathRobot.js")}
+let arguments =
+    {
+        "param1":"{!Account.Name}",
+        "param2":"{!Account.Industry}"
+    };
+    UiPathRobot.init(10);
+    UiPathRobot.getProcesses().then(processes => 
+    {    
+        let process = processes.find(p => p.name.includes('MsgBoxParam'));
+        process.start(arguments).then(result => 
+        {           
+            alert(result.retresult);
+        }, err => {
+           alert(err);
+        })
+    }, err => {
+        alert(err);
+    });
