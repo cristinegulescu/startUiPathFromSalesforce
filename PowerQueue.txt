@@ -1,0 +1,38 @@
+///GET AUTHORIZATION CMD
+https://account.uipath.com/oauth/token
+Content-Type          application/json
+X-UIPATH-TenantName   YOUR TENANTNAME
+///Body for the command
+{
+    "grant_type": "refresh_token",
+    "client_id": "YOUR CLIENT ID",
+    "refresh_token": "YOUR REFRESH TOKEN"
+}
+///Train code for parse JSON 
+{
+    "access_token": "test",
+    "id_token": "test",
+    "scope": "test",
+    "expires_in": 86400,
+    "token_type": "Bearer"
+}
+
+/// SEND DATA TO QUEUE
+https://platform.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Queues/UiPathODataSvc.AddQueueItem
+Authorization 
+Bearer VariableFromAuthCMD
+
+//Body
+
+{
+  "itemData": {
+    "Name": "PowerQueue",
+    "Priority": "Normal",
+    "SpecificContent": {
+      "Type": "Customer",
+      "First_Name": @{variables('firstname')},
+      "Last_Name": @{variables('lastname')},
+      "Company": @{variables('company')}
+    }
+  }
+}
