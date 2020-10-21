@@ -1,0 +1,39 @@
+function createAndSendDocument() {
+  
+  // Make a POST request with a JSON payload.
+var data = {  
+  'grant_type':'refresh_token',
+  'client_id':'YOUR CLIENT ID',
+  'refresh_token':'YOUR REFRESH TOKEN'
+};
+var options = {
+  'method' : 'post',
+  'contentType': 'application/json',
+  'headers' : {'X-UIPATH-TenantName':'YOUR TENANTNAME'},  
+  'payload' : JSON.stringify(data)
+};
+  var response = UrlFetchApp.fetch('https://account.uipath.com/oauth/token', options);
+  var jsonObject = JSON.parse(response.getContentText());
+  
+  var data2 = {    
+   /* 'startInfo': {
+    'ReleaseKey':'YOUR PROCESS ReleaseKey',
+    'Strategy':'All'
+    }*/
+        'startInfo': {
+         'ReleaseKey':'YOUR PROCESS ReleaseKey',
+          'Strategy':'All',
+          'InputArguments':'{\"param1\":\"Test Youtube Google\",\"param2\":\"Video Live 21:21\"}'
+    }
+  };
+  
+  var bear = 'Bearer '+jsonObject.access_token;
+    
+var options2 = {
+  'method' : 'post',
+  'contentType': 'application/json',
+    'headers' : {'X-UIPATH-TenantName':'YOUR TENANTNAME', 'Authorization':bear},  
+  'payload' : JSON.stringify(data2)
+};
+  var response2 = UrlFetchApp.fetch('https://platform.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs', options2); 
+}
