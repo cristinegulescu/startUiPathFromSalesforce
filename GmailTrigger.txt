@@ -1,0 +1,69 @@
+function myFunction() { 
+  var threadList = Gmail.Users.Threads.list('me', {
+      q: 'is:unread label:inbox'     
+    });  
+  if (threadList.threads && threadList.threads.length > 0) {
+      threadList.threads.forEach(function(thread) 
+       {          
+        var id2 = thread.id;         
+        var tdata = Gmail.Users.Threads.get(userId='me', id=id2);       
+        var msg = tdata.messages[0];
+        var subject = '';
+        var date = '';
+        var from = '';
+        var payload = msg.payload.headers;
+        payload.forEach(function(heads)
+                        {          
+       if (heads.name=='Subject')  subject = heads.value;//Logger.log('Header Subject: %s', heads.value);                   
+       else if (heads.name=='Date') date = heads.value;//Logger.log('Header Date: '+heads.value);                          
+       else if (heads.name=='From') 
+       {
+         if (heads.value.indexOf('@uipath.com')>0) 
+         {
+           id = id2;
+           from = heads.value;
+         }
+       }
+                        });  
+         
+         if (from.length>1)
+         {
+			var data = {  
+			'grant_type':'refresh_token',
+			'client_id':'YOUR CLIENT ID',
+			'refresh_token':'YOUR REFRESH TOKEN'
+			};
+			var options = {
+			'method' : 'post',
+			'contentType': 'application/json',
+			'headers' : {'X-UIPATH-TenantName':'YOUR TENANTNAME'},  
+			'payload' : JSON.stringify(data)
+			};
+			var response = UrlFetchApp.fetch('https://account.uipath.com/oauth/token', options);
+			var jsonObject = JSON.parse(response.getContentText());
+  
+			var data2 = {        
+			'itemData': {
+				'Name': 'Gqueue',
+				'Priority': 'Normal',
+				'SpecificContent': {
+					'Type': subject,
+					'First_Name': from
+						}
+					}
+			}; 
+  
+			var bear = 'Bearer '+jsonObject.access_token;
+    
+			var options2 = {
+			'method' : 'post',
+			'contentType': 'application/json',
+			'headers' : {'X-UIPATH-TenantName':'YOUR TENANTNAME', 'Authorization':bear},  
+			'payload' : JSON.stringify(data2)
+			};
+			var response2 = UrlFetchApp.fetch('https://platform.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Queues/UiPathODataSvc.AddQueueItem', options2);                      
+         }
+           
+      });
+  }	
+}	
