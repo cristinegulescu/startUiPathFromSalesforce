@@ -1,0 +1,14 @@
+Filters Example
+ [to] = 'Cristian Negulescu' OR [cc] = 'Cristian Negulescu'
+ [importance] = 'high'
+ [senderemailaddress] = 'robot.salesforce@gmail.com'
+ [receivedtime] > '11/03/2020'
+ [subject] = 'bla bla'
+ [From] = 'NAME of email'
+ [From] = 'NAME of email' AND [subject] = 'YOUR subject'
+ AND NOT  ....  OR
+ 
+ "[receivedtime] > '"+datetime.now.AddDays(-1).ToString("MM/dd/yyyy")+"'"
+ 
+The command inside bat file that you put on task scheduler:
+ "C:\Program Files (x86)\UiPath\Studio\UiRobot.exe" -file C:\Users\cristian.negulescu\Documents\UiPath\ReadOutLook\Main.xaml
