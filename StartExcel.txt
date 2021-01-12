@@ -1,0 +1,71 @@
+Private Sub CommandButton1_Click()
+ Dim req As New MSXML2.ServerXMLHTTP60
+ Dim Body As String
+ Dim myUrl As String
+ Dim Resp As String
+ Dim Tmp As String
+ Dim ProcId As String
+ Dim Auth As String
+ Dim param1 As String
+ Dim param2 As String
+ Dim param3 As String
+ 
+ 'AUTH TOKEN
+ Body = "{""grant_type"": ""refresh_token"",""client_id"": ""YOUR CLIENT ID"",""refresh_token"": ""YOUR REFRESH TOKEN""}"
+ myUrl = "https://account.uipath.com/oauth/token"
+ req.Open "POST", myUrl, False
+ req.SetRequestHeader "Content-Type", "application/json"
+ req.SetRequestHeader "X-UIPATH-TenantName", "YOUR TENANTNAME"
+ req.Send Body
+ Resp = req.ResponseText
+ Auth = "Bearer " + Mid(Resp, InStr(Resp, "access_token") + 15, InStr(Resp, "id_token") - 21)
+ Range("C1").Value = "After I get authorization"
+ 
+ param1 = Range("A1").Value
+ param2 = Range("A2").Value
+ param3 = Range("A3").Value
+ 
+ 'Start PROCESS
+ myUrl = "https://platform.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs"
+ Body = "{""startInfo"":{""ReleaseKey"": ""YOUR PROCESS ReleaseKey"",""Strategy"": ""All"",""InputArguments"": ""{\""in_par1\"":\""" + param1 + "\"",\""in_par2\"":\""" + param2 + "\"",\""in_par3\"":\""" + param3 + "\""}""}}"
+ 
+ req.Open "POST", myUrl, False
+ req.SetRequestHeader "Content-Type", "application/json"
+ req.SetRequestHeader "X-UIPATH-TenantName", "YOUR TENANTNAME"
+ req.SetRequestHeader "Authorization", Auth
+ req.Send Body
+ Resp = req.ResponseText
+ 'MsgBox (Resp)
+ Tmp = Right(Resp, Len(Resp) - InStrRev(Resp, "Id") - 3)
+ ProcId = Left(Tmp, Len(Tmp) - 3)
+ Range("C2").Value = "Process ID: " + ProcId + " and waiting on the loop"
+ 'MsgBox (ProcId)
+ 
+ myUrl = "https://platform.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Jobs?$filter=Id eq " + ProcId
+ Dim i As Integer
+    i = 1
+'LOOP to see that process is done
+ Do While i < 12
+    Application.Wait (Now + TimeValue("0:00:05"))
+    req.Open "GET", myUrl, False
+    req.SetRequestHeader "Content-Type", "application/json"
+    req.SetRequestHeader "X-UIPATH-TenantName", "YOUR TENANTNAME"
+    req.SetRequestHeader "Authorization", Auth
+    req.Send Body
+    Resp = req.ResponseText
+    'MsgBox (Mid(Resp, InStr(Resp, "State") + 8, InStr(Resp, "JobPriority") - InStr(Resp, "State") - 11))
+    Tmp = Mid(Resp, InStr(Resp, "State") + 8, InStr(Resp, "JobPriority") - InStr(Resp, "State") - 11)
+    Tmp = LCase(Tmp)
+    If (Tmp = "successful") Then i = 20
+    i = i + 1
+ Loop
+
+'PRINT THE RESULT
+ Tmp = Mid(Resp, InStr(Resp, "OutputArguments") + 18, InStr(Resp, "HostMachineName") - InStr(Resp, "OutputArguments") - 21)
+ 'MsgBox (Print the full result)
+ Range("C3").Value = Tmp
+ Tmp = Mid(Tmp, 17, Len(Tmp) - 19)
+ 'MsgBox (Print only our output of the process)
+ Range("C4").Value = Tmp
+ 
+End Sub
