@@ -1,0 +1,83 @@
+var testDEMO = Class.create();
+testDEMO.prototype = {
+    initialize: function() {
+    },
+test: function(param1,param2,param3)
+    {       
+    var rm = new sn_ws.RESTMessageV2();
+    rm.setHttpMethod('post');
+    rm.setEndpoint('https://account.uipath.com/oauth/token');
+    rm.setRequestHeader('Content-Type', 'application/json');
+    rm.setRequestHeader('X-UIPATH-TenantName', 'YOUR TENANTNAME');
+
+ var params = {
+    'grant_type': 'refresh_token',
+    'client_id': 'YOUR CLIENT ID',
+    'refresh_token': 'YOUR REFRESH TOKEN'
+  };
+
+var json = new JSON();
+var text = json.encode(params);
+rm.setRequestBody(text);
+var response = rm.execute();
+var body = response.getBody();
+
+var auth = body.substring(body.indexOf('access_token')+15, body.indexOf('id_token')-3);
+
+        gs.info("Body:  "+response.getBody());
+        gs.info("Auth:  "+auth);
+
+var rm2 = new sn_ws.RESTMessageV2();
+    rm2.setHttpMethod('post');  
+    rm2.setEndpoint('https://platform.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs'); 
+    rm2.setRequestHeader('Content-Type', 'application/json');
+    rm2.setRequestHeader('X-UIPATH-TenantName', 'YOUR TENANTNAME');
+    rm2.setRequestHeader('Authorization', 'Bearer '+auth);
+    rm2.setRequestHeader('User-Agent','telnet');    
+
+//how to start a simple process without parameters  
+var params3 = {};
+params3.ReleaseKey ='83ed3245-5686-48a7-942e-29092b406f60';
+params3.Strategy = 'All';
+params3.InputArguments ='{"in_par1":"'+param1+'","in_par2":"'+param2+'","in_par3":"'+param3+'"}';
+
+var params2 = {};
+params2.startInfo = params3;
+
+var json2 = new JSON();
+var text2 = json2.encode(params2);
+rm2.setRequestBody(text2);
+var response2 = rm2.execute();
+var body2 = response2.getBody();
+var ProcID = body2.substring(body2.indexOf('"Id":')+5, body2.length-3);
+gs.info("ProcID:  "+ProcID);
+		
+var body3 = "";
+var i=1;
+while(i<12)
+{
+  gs.sleep(5000);
+  var rm3 = new sn_ws.RESTMessageV2();
+    rm3.setHttpMethod('get');  
+    rm3.setEndpoint('https://platform.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Jobs?$filter=Id%20eq%20' + ProcID); 
+    rm3.setRequestHeader('Content-Type', 'application/json');
+    rm3.setRequestHeader('X-UIPATH-TenantName', 'YOUR TENANTNAME');
+    rm3.setRequestHeader('Authorization', 'Bearer '+auth);
+    rm3.setRequestHeader('User-Agent','telnet');    
+    var response3 = rm3.execute();
+    body3 = response3.getBody();
+	var txt = body3.substring(body3.indexOf('State')+8, body3.indexOf('JobPriority')-3);
+    gs.info("State:  "+txt);
+	if(txt.indexOf('Succ')>-1) i=20; 
+  i = i+1;
+}
+
+//extract the OutPut
+var res = body3.substring(body3.indexOf('OutputArguments')+18, body3.indexOf('HostMachineName')-3);
+gs.info("Big Result:  "+res);
+var outres = res.substring(16,res.length-3);
+gs.info("Rest final: "+outres);	
+ return outres;   
+    },
+    type: 'testDEMO'
+};
