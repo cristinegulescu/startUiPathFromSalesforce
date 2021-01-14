@@ -1,0 +1,65 @@
+var testQUEUE = Class.create();
+testQUEUE.prototype = {
+    initialize: function() {
+    },
+test: function(param1,param2,param3)
+    {       
+    var rm = new sn_ws.RESTMessageV2();
+    rm.setHttpMethod('post');
+    rm.setEndpoint('https://account.uipath.com/oauth/token');
+    rm.setRequestHeader('Content-Type', 'application/json');
+    rm.setRequestHeader('X-UIPATH-TenantName', 'YOUR TENANTNAME');
+
+ var params = {
+    'grant_type': 'refresh_token',
+    'client_id': 'YOUR CLIENT ID',
+    'refresh_token': 'YOUR REFRESH TOKEN'
+  };
+
+var json = new JSON();
+var text = json.encode(params);
+rm.setRequestBody(text);
+var response = rm.execute();
+var body = response.getBody();
+
+var auth = body.substring(body.indexOf('access_token')+15, body.indexOf('id_token')-3);
+
+        gs.info("Body:  "+response.getBody());
+        gs.info("Auth:  "+auth);
+
+var rm2 = new sn_ws.RESTMessageV2();
+    rm2.setHttpMethod('post');
+    rm2.setEndpoint('https://platform.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Queues/UiPathODataSvc.AddQueueItem'); 
+    rm2.setRequestHeader('Content-Type', 'application/json');
+    rm2.setRequestHeader('X-UIPATH-TenantName', 'YOUR TENANTNAME');
+    rm2.setRequestHeader('Authorization', 'Bearer '+auth);
+    rm2.setRequestHeader('User-Agent','telnet');    
+
+gs.info("param1:"+param1);
+		gs.info("param2:"+param2);
+		gs.info("param3:"+param3);
+		
+//create JSON for the Queue element
+var Spec = {};
+Spec.Param1 = param1+"";
+Spec.Param2 = param2+"";
+Spec.Param3 = param3+"";
+
+var itemD = {};
+itemD.Name = "SNowQueue";
+itemD.Priority = "Normal";
+itemD.SpecificContent = Spec;
+
+var params2 = {};
+params2.itemData = itemD;
+
+var json2 = new JSON();
+var text2 = json2.encode(params2);
+rm2.setRequestBody(text2);
+var response2 = rm2.execute();
+var body2 = response2.getBody();
+gs.info("Response :  "+body2);
+return body2;
+    },
+    type: 'testQUEUE'
+};
