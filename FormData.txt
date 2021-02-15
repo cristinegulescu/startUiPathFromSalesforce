@@ -1,0 +1,48 @@
+/// Visual Basic and UiPath Code
+
+Dim client As HttpClient = New HttpClient()
+client.BaseAddress = New Uri("YOUR URL")
+client.DefaultRequestHeaders.Accept.Clear()
+client.DefaultRequestHeaders.Accept.Add(New MediaTypeWithQualityHeaderValue("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))
+// for BASIC AUTH
+Dim byteArray As Byte() = Encoding.ASCII.GetBytes(“username:password”)
+client.DefaultRequestHeaders.Authorization = New AuthenticationHeaderValue(“Basic”, Convert.ToBase64String(byteArray))Dim byteArray As Byte() = Encoding.ASCII.GetBytes(“username:password”)        
+// for OAUTH2
+client.DefaultRequestHeaders.Add("authorization", "Bearer YOUR TOKEN")
+Dim request As MultipartFormDataContent = New MultipartFormDataContent()
+request.Add(New StringContent("tags"), "Bad")
+request.Add(New StringContent("displayreferencetext"), "true")
+request.Add(New StringContent("similaritythreshold"), "0.63")
+request.Add(New StreamContent(File.OpenRead("C:\\8A.docx")), "file", (New FileInfo("C:\\8A.docx").Name))
+
+Dim response As HttpResponseMessage = client.PostAsync("", request).Result
+Dim strm As Stream = response.Content.ReadAsStreamAsync.Result
+Dim doc As Byte()
+Dim ms As MemoryStream = New MemoryStream()
+strm.CopyTo(ms)
+doc = ms.ToArray()
+File.WriteAllBytes("C:\\rpa\\FORDOWNLOAD\\rez.docx", doc)
+
+
+/// C# Code
+
+            HttpClient apiCallClient = new HttpClient();            
+            String restCallURL = "YOUR URL";            
+            HttpRequestMessage apirequest = new HttpRequestMessage(HttpMethod.Post, restCallURL); // post
+            apirequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.openxmlformats-officedocument.wordprocessingml.document"));
+            apirequest.Headers.Add("authorization", "Bearer YOUR TOKEN");            
+            MultipartFormDataContent test = new MultipartFormDataContent();
+            test.Add(new StringContent("tags"), "Bad");
+            test.Add(new StringContent("displayreferencetext"), "true");
+            test.Add(new StringContent("similaritythreshold"), "0.63");
+            test.Add(new StreamContent(File.OpenRead("C:\\8A.docx")), "file", (new FileInfo("C:\\8A.docx").Name));            
+            apirequest.Content = test;
+
+            HttpResponseMessage apiCallResponse = await apiCallClient.SendAsync(apirequest);
+                  
+            Stream s = await apiCallResponse.Content.ReadAsStreamAsync();
+            byte[] doc = null;
+            MemoryStream ms = new MemoryStream();
+            s.CopyTo(ms);
+            doc = ms.ToArray();
+            File.WriteAllBytes("C:\\rpa\\FORDOWNLOAD\\rez.docx", doc);
