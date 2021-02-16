@@ -10,9 +10,9 @@ client.DefaultRequestHeaders.Authorization = New AuthenticationHeaderValue(“Ba
 // for OAUTH2
 client.DefaultRequestHeaders.Add("authorization", "Bearer YOUR TOKEN")
 Dim request As MultipartFormDataContent = New MultipartFormDataContent()
-request.Add(New StringContent("tags"), "Bad")
-request.Add(New StringContent("displayreferencetext"), "true")
-request.Add(New StringContent("similaritythreshold"), "0.63")
+request.Add(New StringContent("Bad"), "tags")
+request.Add(New StringContent("true"), "displayreferencetext")
+request.Add(New StringContent("0.63"), "similaritythreshold")
 request.Add(New StreamContent(File.OpenRead("C:\\8A.docx")), "file", (New FileInfo("C:\\8A.docx").Name))
 
 Dim response As HttpResponseMessage = client.PostAsync("", request).Result
@@ -32,9 +32,9 @@ File.WriteAllBytes("C:\\rpa\\FORDOWNLOAD\\rez.docx", doc)
             apirequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.openxmlformats-officedocument.wordprocessingml.document"));
             apirequest.Headers.Add("authorization", "Bearer YOUR TOKEN");            
             MultipartFormDataContent test = new MultipartFormDataContent();
-            test.Add(new StringContent("tags"), "Bad");
-            test.Add(new StringContent("displayreferencetext"), "true");
-            test.Add(new StringContent("similaritythreshold"), "0.63");
+            test.Add(new StringContent("Bad"), "tags");
+            test.Add(new StringContent("true"), "displayreferencetext");
+            test.Add(new StringContent("0.63"), "similaritythreshold");
             test.Add(new StreamContent(File.OpenRead("C:\\8A.docx")), "file", (new FileInfo("C:\\8A.docx").Name));            
             apirequest.Content = test;
 
