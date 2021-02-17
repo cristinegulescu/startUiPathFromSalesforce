@@ -1,0 +1,21 @@
+// UPLOAD FILE CODE
+
+Dim client2 As HttpClient = New HttpClient()
+Dim filebytes As Byte() = File.ReadAllBytes("c:\\yourfile.docx")
+Dim urilink As Uri = New Uri("https://yoururl")
+Dim request2 As ByteArrayContent = New ByteArrayContent(filebytes)
+request2.Headers.ContentType = New MediaTypeHeaderValue("application/octet-stream")
+Dim response2 As HttpResponseMessage = client2.PostAsync(urilink, request2).Result
+Dim stat As String = response2.StatusCode.ToString
+
+// DOWNLOAD FILE CODE
+
+Dim httpRequest As HttpWebRequest = DirectCast(WebRequest.Create("https://url.pdf"), HttpWebRequest)
+httpRequest.Method = WebRequestMethods.Http.Get
+Dim httpResponse As HttpWebResponse = DirectCast(httpRequest.GetResponse(), HttpWebResponse)
+Dim httpResponseStream As Stream = httpResponse.GetResponseStream()
+Dim doc As Byte()
+Dim ms As MemoryStream = New MemoryStream()
+httpResponseStream.CopyTo(ms)
+doc = ms.ToArray()
+File.WriteAllBytes("C:\\yourfile.pdf", doc)
