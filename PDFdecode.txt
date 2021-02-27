@@ -1,0 +1,390 @@
+        'FILE1
+        Dim strtmp As String
+        strtmp = strin.Substring(strin.IndexOf("Number"), strin.IndexOf("Subtotal") - strin.IndexOf("Number")).Trim
+        strout = strtmp.Replace(" ", "|")
+
+        strtmp = strin.Substring(strin.IndexOf("Subtotal") + 8)
+        strpar = strtmp.Substring(0, strtmp.IndexOf(Environment.NewLine)).Trim
+
+
+        'FILE2
+        Dim strtmp As String
+        Dim strout As String
+        strout = "Col1|Col2|Col3|Col4"
+        strtmp = strin.Substring(strin.IndexOf("Vacancies") + 11).Trim
+        For Each line As String In strtmp.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            If (line.Length > 3) Then
+                If (IsNumeric(line(0))) And (line(1) = " ") And (line(2) = " ") Then
+                    strout = strout + Environment.NewLine + line.Replace("  ", "").Replace("  ", "|").Trim
+                ElseIf (line(0) = "") And (line(1) = " ") And (line(2) = " ") Then
+                    strout = strout + line.Replace("  ", "$").Trim()
+                Else
+                    strout = strout + line.Trim
+                End If
+            End If
+        Next
+        strout = strout + Environment.NewLine
+        strout2 = strout
+
+
+        'FILE3
+        Dim strtmp As String
+        Dim idx As Int32 = 0
+        strout = "col1|col2|col3|col4|col5|col6|col7|col8|col9|col10|col11|col12|col13|col14|col15|col16|col17|col18|col19|col20|col21|col22|col23" + Environment.NewLine
+        strtmp = strin.Substring(strin.IndexOf("state name") + 11, strin.IndexOf("authorized") - 10 - strin.IndexOf("state name") - 11).Trim
+        For Each line As String In strtmp.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            For Each word As String In line.Split(" "c)
+                If (idx < 22) Then
+                    strout = strout + word + "|"
+                Else
+                    strout = strout + word + "_"
+                End If
+                idx = +1
+            Next
+            strout = +Environment.NewLine
+            idx = 0
+        Next
+
+
+        'FILE5
+        Dim strtmp As String
+        Dim Idx As Int32 = 0
+        Dim strtmp2 As String
+        strtmp = strin.Substring(strin.IndexOf("Hrs/Qty"), strin.LastIndexOf("This is") - strin.IndexOf("Hrs/Qty") - 1).Trim
+        strtmp = strtmp.Replace("Sub Total", "Sub_Total")
+        Dim first As Boolean = True
+        For Each line As String In strtmp.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
+            If first Then
+                first = False
+                strout = line.Replace(" ", "|") + Environment.NewLine
+            Else
+                idx = line.IndexOf(" "c)
+                strtmp2 = line.Remove(idx, 1).Insert(idx, "|").Trim
+                idx = strtmp2.LastIndexOf(" "c)
+                strtmp2 = strtmp2.Remove(idx, 1).Insert(idx, "|")
+                idx = strtmp2.LastIndexOf(" "c)
+                strtmp2 = strtmp2.Remove(idx, 1).Insert(idx, "|")
+                idx = strtmp2.LastIndexOf(" "c)
+                strtmp2 = strtmp2.Remove(idx, 1).Insert(idx, "|")
+                strout = strout + strtmp2 + Environment.NewLine
+            End If
+        Next
+
+        strtmp = strin.Substring(strin.IndexOf("Due Date") + 8)
+        strpar = strtmp.Substring(0, strtmp.IndexOf(Environment.NewLine)).Trim
+
+
+
+        'FILE6
+        Dim strtmp As String
+        Dim strtmp2 As String
+        Dim Idx As Int32 = 0
+        Dim strcol As String = ""
+        Dim strend As String = ""
+        strtmp = strin.Substring(strin.IndexOf("S.N"), strin.LastIndexOf("Example") - strin.IndexOf("S.N") - 1).Trim
+        Dim first As Boolean = True
+        For Each line As String In strtmp.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            If first Then
+                first = False
+                strout = line.Replace("  ", "|")
+            Else
+                If (line.Length > 3) And (line(1) = " ") And (line(2) = " ") Then
+
+                    strout = strout + strcol + strend
+
+                    idx = line.IndexOf("  ")
+                    strout = strout + Environment.NewLine + line.Substring(0, idx).Trim + "|"
+
+                    strend = "|" + line.Substring(line.LastIndexOf("  ") + 2)
+                    idx = line.LastIndexOf("  ")
+                    strtmp2 = line.Substring(0, idx).Trim
+                    strend = "|" + strtmp2.Substring(strtmp2.LastIndexOf("  ") + 2) + strend
+
+                    idx = strtmp2.LastIndexOf("  ")
+                    strtmp2 = strtmp2.Substring(0, idx).Trim
+                    strend = "|" + strtmp2.Substring(strtmp2.LastIndexOf("  ") + 2) + strend
+
+                    idx = strtmp2.LastIndexOf("  ")
+                    strtmp2 = strtmp2.Substring(0, idx).Trim
+                    strend = "|" + strtmp2.Substring(strtmp2.LastIndexOf("  ") + 2) + strend
+
+                    idx = strtmp2.LastIndexOf("  ")
+                    strtmp2 = strtmp2.Substring(0, idx).Trim
+                    strcol = strtmp2.Substring(strtmp2.IndexOf("  ") + 2)
+                Else
+                    strcol = strcol + " " + line.Trim
+                End If
+            End If
+        Next
+        strout = strout + strcol + strend + Environment.NewLine
+
+
+        'FILE8
+        Dim strtmp As String
+        strtmp = strin.Substring(strin.IndexOf("QTY"), strin.LastIndexOf("TOTAL") - strin.IndexOf("QTY") - 1).Trim
+        strtmp = strtmp.Replace("UNIT PRICE", "UNIT_PRICE")
+        strout = strtmp.Replace(" ", "|")
+
+        strtmp = strin.Substring(strin.IndexOf("Due Date") + 8)
+        strpar = strtmp.Substring(0, strtmp.IndexOf(Environment.NewLine)).Trim
+
+
+        'FILE9
+        Dim strtmp As String
+        strtmp = strin.Substring(strin.IndexOf("Ref.")).Trim
+        Dim findspace As Boolean = True
+        Do While findspace
+            strtmp = strtmp.Replace("    ", "   ")
+            If (strtmp.IndexOf("    ") < 0) Then
+                findspace = False
+            End If
+        Loop
+        strtmp = strtmp.Replace("   ", "  ")
+        strout = strtmp.Replace("  ", "|")
+
+
+        'FILE10
+        Dim strtmp As String
+        Dim cnt As Int32 = 0
+        Dim array() As String
+        Dim Col2 As String = ""
+        Dim Col3 As String = ""
+        Dim Col4 As String = ""
+        Dim Col5 As String = ""
+        strtmp = strin.Substring(strin.IndexOf("#")).Trim
+        Dim first As Boolean = True
+        For Each line As String In strtmp.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            If first Then
+                first = False
+                strout = line.Replace("  ", "|") + Environment.NewLine
+            Else
+                cnt = line.Split(New String() {"  "}, StringSplitOptions.None).Count
+                array = line.Split(New String() {"  "}, StringSplitOptions.None)
+
+                Select Case cnt
+                    Case 5
+                        If Col2.Length > 1 Then
+                            strout = strout + "|" + Col2 + "|" + Col3 + "|" + Col4 + "|" + Col5 + Environment.NewLine
+                        End If
+                        strout = strout + array(0)
+                        Col2 = array(1)
+                        Col3 = array(2)
+                        Col4 = array(3)
+                        Col5 = array(4)
+                    Case 1
+                        Col5 = Col5 + " " + array(0)
+                    Case 2
+                        Col3 = Col3 + " " + array(0)
+                        Col5 = Col5 + " " + array(1)
+                    Case 3
+                        If (array(0).Length > array(1).Length) Then
+                            Col3 = Col3 + " " + array(0)
+                            Col4 = Col4 + " " + array(1)
+                        Else
+                            Col2 = Col2 + " " + array(0)
+                            Col3 = Col3 + " " + array(1)
+                        End If
+                        Col5 = Col5 + " " + array(2)
+                    Case 4
+                        Col2 = Col2 + " " + array(0)
+                        Col3 = Col3 + " " + array(1)
+                        Col4 = Col4 + " " + array(2)
+                        Col5 = Col5 + " " + array(3)
+                End Select
+            End If
+        Next
+        strout = strout + "|" + Col2 + "|" + Col3 + "|" + Col4 + "|" + Col5 + Environment.NewLine
+
+
+        'FILE11
+        Dim strtmp As String
+        strtmp = strin.Substring(strin.IndexOf("Level")).Trim
+        strtmp = strtmp.Replace("      ", "  -  -  ")
+        strout = strtmp.Replace("  ", "|")
+
+
+        'FILE12
+        For Each line As String In strin.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            If (line.Trim.Length > 1) Then
+                If (line.Trim.IndexOf("  ") > 0) Then
+                    strout = strout + line.Trim.Replace("  ", "|") + Environment.NewLine
+                Else
+                    strout = strout + line.Trim + "||||" + Environment.NewLine
+                End If
+            End If
+        Next
+
+
+        'FILE13
+        Dim strtmp As String
+        Dim Idx As Int32
+        Dim array() As String
+        strtmp = strin.Substring(strin.IndexOf("Speed (mph)"), strin.LastIndexOf("Example 5:") - strin.IndexOf("Speed (mph)") - 13).Trim
+        strtmp = strtmp.Replace("Speed (mph)", "Speed_(mph)")
+        strtmp = (strtmp.Replace("   ", "  ")).Replace("  ", " ")
+        Dim first As Boolean = True
+        For Each line As String In strtmp.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            If first Then
+                first = False
+                strout = line.Replace(" ", "|") + Environment.NewLine
+            Else
+                'Idx = array.Length
+                array = line.Trim.Split(" "c)
+                strout = strout + array(0) + "|" + array(1) + " " + array(2) + "|"
+                If (array(array.Length - 2) = "Rocket") Then
+                    For index As Integer = 3 To array.Length - 2
+                        strout = strout + array(index) + " "
+                    Next
+                    strout = strout + "|" + array(array.Length - 2) + "|" + array(array.Length - 1) + Environment.NewLine
+                ElseIf (array(array.Length - 4).Trim).Length = 2 Then
+                    For index As Integer = 3 To array.Length - 5
+                        strout = strout + array(index) + " "
+                    Next
+                    strout = strout + "|" + array(array.Length - 4) + " " + array(array.Length - 3) + " " + array(array.Length - 2) + "|" + array(array.Length - 1) + Environment.NewLine
+                Else
+                    For index As Integer = 3 To array.Length - 4
+                        strout = strout + array(index) + " "
+                    Next
+                    strout = strout + "|" + array(array.Length - 3) + " " + array(array.Length - 2) + "|" + array(array.Length - 1) + Environment.NewLine
+                End If
+            End If
+        Next
+
+
+        'FILE15
+        Dim strtmp As String
+        Dim cnt As Int32 = 0
+        Dim array() As String
+        Dim Col1 As String = ""
+        Dim Col2 As String = ""
+        Dim Col3 As String = ""
+        strtmp = strin.Substring(strin.IndexOf("Metric Name")).Trim
+        Dim first As Boolean = True
+        For Each line As String In strtmp.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            If first Then
+                first = False
+                strout = line.Replace("  ", "|") + Environment.NewLine
+            Else
+                cnt = line.Trim.Split(New String() {"  "}, StringSplitOptions.None).Count
+                array = line.Trim.Split(New String() {"  "}, StringSplitOptions.None)
+
+                Select Case cnt
+                    Case 3
+                        If Col2.Length > 1 Then
+                            strout = strout + Col1 + "|" + Col2 + "|" + Col3 + Environment.NewLine
+                        End If
+                        Col1 = array(0)
+                        Col2 = array(1)
+                        Col3 = array(2)
+                    Case 1
+                        Col2 = Col2 + " " + array(0)
+                    Case 2
+                        Col1 = Col1 + " " + array(0)
+                        Col2 = Col2 + " " + array(1)
+                End Select
+            End If
+        Next
+        strout = strout + Col1 + "|" + Col2 + "|" + Col3 + Environment.NewLine
+
+
+        'FILE17
+        Dim strtmp As String
+        strtmp = strin.Substring(strin.IndexOf("Equipment No"), strin.LastIndexOf("Transport Plan") - strin.IndexOf("Equipment No") - 1).Trim
+        strtmp = strtmp.Replace("Equipment No", "Equipment_No")
+        strtmp = strtmp.Replace("Interim Pin", "Interim_Pin")
+        strtmp = strtmp.Replace(" Weight", "_Weight")
+        strtmp = strtmp.Replace(" KGS", "_KGS")
+        strtmp = strtmp.Replace(" DRY ", "_DRY_")
+        Dim first As Boolean = True
+        For Each line As String In strtmp.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            If first Then
+                first = False
+                strout = line.Replace(" ", "|") + Environment.NewLine
+            Else
+                strout = strout + line.Replace(" ", "|") + "||||" + Environment.NewLine
+            End If
+        Next
+
+
+        'FILE18
+        Dim strtmp As String
+        strtmp = strin.Substring(strin.IndexOf("ID  "), strin.LastIndexOf("Sub Total") - strin.IndexOf("ID  ") - 3).Trim
+        strout = strtmp.Replace("  ", "|")
+
+
+        'FILE19
+        Dim strtmp As String
+        Dim cnt As Int32 = 0
+        Dim array() As String
+        Dim fullline As String = ""
+        Dim desc As String = ""
+        strtmp = strin.Substring(strin.IndexOf("ID  "), strin.LastIndexOf("Sub Total") - strin.IndexOf("ID  ") - 3).Trim
+        Dim first As Boolean = True
+        For Each line As String In strtmp.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            If first Then
+                first = False
+                strout = line.Replace("  ", "|") + Environment.NewLine
+            Else
+                cnt = line.Trim.Split(New String() {"  "}, StringSplitOptions.None).Count
+                array = line.Trim.Split(New String() {"  "}, StringSplitOptions.None)
+                If cnt = 5 Then
+                    If desc.Length > 1 Then
+                        strout = strout + fullline.Replace("$$$", desc) + Environment.NewLine
+                    End If
+                    fullline = array(0) + "|$$$|" + array(2) + "|" + array(3) + "|" + array(4)
+                    desc = array(1)
+                ElseIf cnt = 1 Then
+                    desc = desc + " " + array(0)
+                Else
+                    strout = strout + fullline.Replace("$$$", desc) + Environment.NewLine
+                    strout = strout + array(0) + "|" + array(1) + "|" + array(2) + "|" + array(3) + "|" + array(4).Split(" "c)(0) + Environment.NewLine
+                    fullline = array(4).Split(" "c)(1) + "|$$$|" + array(6) + "|" + array(7) + "|" + array(8)
+                    desc = array(5)
+                End If
+            End If
+        Next
+        strout = strout + fullline.Replace("$$$", desc) + Environment.NewLine
+
+
+        'FILE20
+        Dim strtmp As String
+        Dim cnt As Int32 = 0
+        Dim array() As String
+        Dim desc1 As String = ""
+        Dim desc2 As String = ""
+        strout = "col1|col2|col3|col4|col5|col6" + Environment.NewLine
+        strtmp = strin.Substring(strin.IndexOf("complete ") + 10).Trim
+        For Each line As String In strtmp.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            cnt = line.Trim.Split(New String() {"  "}, StringSplitOptions.None).Count
+            array = line.Trim.Split(New String() {"  "}, StringSplitOptions.None)
+            If cnt = 6 Then
+                If desc1.Length > 1 Then
+                    strout = strout + desc1 + "|" + desc2 + Environment.NewLine
+                End If
+                strout = strout + array(0) + "|" + array(1) + "|" + array(2) + "|" + array(3) + "|"
+                desc1 = array(4)
+                desc2 = array(5)
+            Else
+                desc1 = desc1 + " " + array(0)
+                desc2 = desc2 + " " + array(1)
+            End If
+        Next
+        strout = strout + desc1 + "|" + desc2 + Environment.NewLine
+
+
+        'FILE21
+        Dim strtmp As String
+        Dim cnt As Int32 = 0
+        strtmp = strin.Substring(strin.IndexOf("Pos."), strin.LastIndexOf("Zögern") - strin.IndexOf("Pos.") - 6).Trim
+        Do
+            strtmp = strtmp.Replace("   ", "  ")
+            cnt = strtmp.IndexOf("   ")
+        Loop Until cnt = -1
+        For Each line As String In strtmp.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            cnt = line.Trim.Split(New String() {"  "}, StringSplitOptions.None).Count
+            If cnt = 7 Then
+                strout = strout + line.Trim.Replace("  ", "|") + Environment.NewLine
+            Else
+                strout = strout + "||" + line.Trim.Replace("  ", "||||") + Environment.NewLine
+            End If
+        Next
