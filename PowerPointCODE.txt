@@ -1,0 +1,327 @@
+'VB.NET code that call POWER POINT
+
+'ADD SLIDE WITH TEXT AND PICTURE
+
+        Dim oApp As Microsoft.Office.Interop.PowerPoint.Application
+        Dim oPres As Microsoft.Office.Interop.PowerPoint.Presentation = Nothing
+        Dim oSlide As Microsoft.Office.Interop.PowerPoint.Slide = Nothing
+
+        'Start Powerpoint and make its window visible but minimized.
+        oApp = New Microsoft.Office.Interop.PowerPoint.Application()
+        oApp.Visible = Microsoft.Office.Core.MsoTriState.msoTrue
+        oPres = oApp.Presentations.Open("C:\R\power.pptx",,,)
+        oApp.WindowState = Microsoft.Office.Interop.PowerPoint.PpWindowState.ppWindowMaximized
+
+        'Add Slide with text
+        oSlide = oPres.Slides.Add(1, Microsoft.Office.Interop.PowerPoint.PpSlideLayout.ppLayoutTitle)
+        With oSlide.Shapes.Item(1).TextFrame.TextRange
+            .Text = "My Sample Presentation"
+            .Font.Name = "Comic Sans MS"
+            .Font.Size = 48
+        End With
+
+        'Add Picture
+        Dim sPic As String = "C:\R\0s.jpg"
+        oSlide.Shapes.AddPicture(sPic, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, 100, 100, 400, 400)
+		
+		oPres.Save()
+        oPres = Nothing
+        oApp.Quit()
+        oApp = Nothing
+        GC.Collect() 
+		
+'ADD CHART IN SLIDE
+
+        Dim oApp As Microsoft.Office.Interop.PowerPoint.Application
+        Dim oPres As Microsoft.Office.Interop.PowerPoint.Presentation = Nothing
+        Dim oSlide As Microsoft.Office.Interop.PowerPoint.Slide = Nothing
+       
+        oApp = New Microsoft.Office.Interop.PowerPoint.Application()
+        oApp.Visible = Microsoft.Office.Core.MsoTriState.msoTrue
+        oPres = oApp.Presentations.Open("C:\R\power.pptx",,,)
+        oApp.WindowState = Microsoft.Office.Interop.PowerPoint.PpWindowState.ppWindowMaximized
+       
+        oSlide = oPres.Slides.Add(2, Microsoft.Office.Interop.PowerPoint.PpSlideLayout.ppLayoutTitleOnly)
+        With oSlide.Shapes.Item(1).TextFrame.TextRange
+            .Text = "My Chart"
+            .Font.Name = "Comic Sans MS"
+            .Font.Size = 48
+        End With
+        Dim oChart As Microsoft.Office.Interop.Graph.Chart
+        oChart = CType(oSlide.Shapes.AddOLEObject(150, 150, 480, 320, "MSGraph.Chart.8").OLEFormat.Object, Microsoft.Office.Interop.Graph.Chart)
+        oChart.ChartType = Microsoft.Office.Interop.Graph.XlChartType.xl3DPie
+		
+		oPres.Save()
+        oPres = Nothing
+        oApp.Quit()
+        oApp = Nothing
+        GC.Collect()		
+		
+'ADD TEXT WITH SHADOW
+
+       Dim oApp As Microsoft.Office.Interop.PowerPoint.Application
+        Dim oPres As Microsoft.Office.Interop.PowerPoint.Presentation = Nothing
+        Dim oSlide As Microsoft.Office.Interop.PowerPoint.Slide = Nothing
+       
+        oApp = New Microsoft.Office.Interop.PowerPoint.Application()
+        oApp.Visible = Microsoft.Office.Core.MsoTriState.msoTrue
+        oPres = oApp.Presentations.Open("C:\R\power.pptx",,,)
+        oApp.WindowState = Microsoft.Office.Interop.PowerPoint.PpWindowState.ppWindowMaximized
+       
+        oSlide = oPres.Slides.Add(3, Microsoft.Office.Interop.PowerPoint.PpSlideLayout.ppLayoutBlank)
+        oSlide.FollowMasterBackground = Microsoft.Office.Core.MsoTriState.msoFalse
+        Dim oshape As Microsoft.Office.Interop.PowerPoint.Shape
+        oshape = oSlide.Shapes.AddTextEffect(Microsoft.Office.Core.MsoPresetTextEffect.msoTextEffect27,
+            "the end", "impact", 96, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoFalse, 230, 200)
+        oshape.Shadow.ForeColor.SchemeColor = Microsoft.Office.Interop.PowerPoint.PpColorSchemeIndex.ppForeground
+        oshape.Shadow.Visible = Microsoft.Office.Core.MsoTriState.msoTrue
+        oshape.Shadow.OffsetX = 3
+        oshape.Shadow.OffsetY = 3
+		
+		oPres.Save()
+        oPres = Nothing
+        oApp.Quit()
+        oApp = Nothing
+        GC.Collect()		
+		
+'SLIDE SHOW 
+
+        Dim oApp As Microsoft.Office.Interop.PowerPoint.Application
+        Dim oPres As Microsoft.Office.Interop.PowerPoint.Presentation = Nothing
+        Dim oSlide As Microsoft.Office.Interop.PowerPoint.Slide = Nothing
+        
+        oApp = New Microsoft.Office.Interop.PowerPoint.Application()
+        oApp.Visible = Microsoft.Office.Core.MsoTriState.msoTrue
+        oPres = oApp.Presentations.Open("C:\R\power.pptx",,,)
+        oApp.WindowState = Microsoft.Office.Interop.PowerPoint.PpWindowState.ppWindowMaximized
+
+        Dim SlideIdx(3) As Integer
+        SlideIdx(0) = 1
+        SlideIdx(1) = 2
+        SlideIdx(2) = 3
+        With oPres.Slides.Range(SlideIdx).SlideShowTransition
+            .AdvanceOnTime = Microsoft.Office.Core.MsoTriState.msoTrue
+            .AdvanceTime = 3
+            .EntryEffect = Microsoft.Office.Interop.PowerPoint.PpEntryEffect.ppEffectBoxOut
+        End With
+        Dim oSettings As Microsoft.Office.Interop.PowerPoint.SlideShowSettings
+        oSettings = oPres.SlideShowSettings
+        oSettings.StartingSlide = 1
+        oSettings.EndingSlide = 3
+        oSettings.Run()       
+
+'SIMPLE COMMANDS
+
+        Dim oApp As Microsoft.Office.Interop.PowerPoint.Application
+        Dim oPres As Microsoft.Office.Interop.PowerPoint.Presentation = Nothing
+        Dim oSlide As Microsoft.Office.Interop.PowerPoint.Slide = Nothing
+       
+        oApp = New Microsoft.Office.Interop.PowerPoint.Application()
+        oApp.Visible = Microsoft.Office.Core.MsoTriState.msoTrue
+        oPres = oApp.Presentations.Open("C:\R\power.pptx",,,)
+        oApp.WindowState = Microsoft.Office.Interop.PowerPoint.PpWindowState.ppWindowMaximized
+
+		'Delete Slide 
+        'oPres.Slides.Item(3).Delete()
+
+        'Éxport to PDF
+        'oPres.SaveAs("C:\R\tmp.pdf", Microsoft.Office.Interop.PowerPoint.PpSaveAsFileType.ppSaveAsPDF)
+		
+        'ADD COMMENT
+        oSlide = oPres.Slides(1)
+        oSlide.Comments.Add(Left:=12, Top:=12,
+        Author:="", AuthorInitials:="",
+        Text:="comment number 2")
+
+        'READ COMMENT
+        'oSlide.Comments.Item(1).Text
+        'oSlide.Comments.Item(1).Author
+
+        'DELETE COMMENT
+        oSlide.Comments.Item(1).Delete()
+		
+		oPres.Save()        
+        oPres = Nothing
+        oApp.Quit()
+        oApp = Nothing
+        GC.Collect()		
+		
+'COMPLEX FILE
+
+   Dim oApp As Microsoft.Office.Interop.PowerPoint.Application
+        Dim oPres As Microsoft.Office.Interop.PowerPoint.Presentation = Nothing
+        Dim oSlide As Microsoft.Office.Interop.PowerPoint.Slide = Nothing
+
+        'Start Powerpoint and make its window visible but minimized.
+        oApp = New Microsoft.Office.Interop.PowerPoint.Application()
+        oApp.Visible = Microsoft.Office.Core.MsoTriState.msoTrue
+        oPres = oApp.Presentations.Add
+        oApp.WindowState = Microsoft.Office.Interop.PowerPoint.PpWindowState.ppWindowMaximized
+
+		Dim oShape As  Microsoft.Office.Interop.PowerPoint.Shape
+        Dim oTextRange As  Microsoft.Office.Interop.PowerPoint.TextRange
+        Dim trm As  Microsoft.Office.Interop.PowerPoint.TextFrame
+        Try
+            ' -------------------- ADD SLIDE#1 -------------------- 
+            oSlide = oPres.Slides.Add(1,  Microsoft.Office.Interop.PowerPoint.PpSlideLayout.ppLayoutTitleOnly)
+            With oSlide.Shapes.Item(1).TextFrame.TextRange
+                .Text = "UIPath Sample Presentation"
+                .Font.Name = "Arial Black"
+                .Font.Size = 22
+                .Font.Color.RGB = RGB(255, 0, 0)
+            End With
+
+            ' DRAW LINE
+            oShape = oSlide.Shapes.AddLine(70, 100, 650, 100) ' Y should be same
+            ' LINE COLOR
+            oShape.Line.ForeColor.RGB = RGB(255, 0, 0)
+            ' BOLD LINE
+            oShape.Line.Weight = 3
+            ' COMPANY LOGO AT BOTTOM
+            oSlide.Shapes.AddPicture("C:\R\jira.png", Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, 520, 480, 180, 40)
+
+            ' MUST SET IT TO NOTHING
+            oSlide = Nothing
+
+
+            ' -------------------- ADD SLIDE#2 -------------------- 
+            oSlide = oPres.Slides.Add(2,  Microsoft.Office.Interop.PowerPoint.PpSlideLayout.ppLayoutTitleOnly)
+            With oSlide.Shapes.Item(1).TextFrame.TextRange
+                .Text = "Report Overview"
+                .Font.Name = "Arial Black"
+                .Font.Size = 20
+                .Font.Color.RGB = RGB(255, 0, 0)
+            End With
+
+            ' ADD TEXTBOX
+            oSlide.Shapes.AddTextbox(Microsoft.Office.Core.MsoTextOrientation.msoTextOrientationHorizontal, 65, 160, 400, 200).TextEffect.Alignment = Microsoft.Office.Core.MsoTextEffectAlignment.msoTextEffectAlignmentLeft
+            ' ADD TEXTRANGE
+            oTextRange = oSlide.Shapes(2).TextFrame.TextRange
+
+            ' DEFINE BULLETS
+            trm = oSlide.Shapes(2).TextFrame
+            trm.TextRange.ParagraphFormat.Bullet.Type =  Microsoft.Office.Interop.PowerPoint.PpBulletType.ppBulletUnnumbered
+
+            ' TEXT
+            oTextRange.Text = "Its easy to list"
+            oTextRange.Font.Size = 24
+            oTextRange.Font.Name = "HleveticaNeue LT 55 Roman"
+            oTextRange.Font.Color.RGB = RGB(255, 0, 0)
+
+            ' ANOTHER TEXT INSIDE TEXTBOX
+            oTextRange.InsertAfter("" & Chr(10))
+            oTextRange.InsertAfter("With bullet points as well...")
+            oTextRange.InsertAfter("" & Chr(10))
+            oTextRange.InsertAfter("Here is a sample!!")
+            oTextRange.InsertAfter("" & Chr(10))
+            oTextRange.InsertAfter("Cool, isn't it?")
+
+            ' DRAW LINE
+            oShape = oSlide.Shapes.AddLine(70, 100, 650, 100) ' Y should be same
+            oShape.Line.ForeColor.RGB = RGB(255, 0, 0)
+            oShape.Line.Weight = 3
+
+            ' COMPANY LOGO AT BOTTOM
+            oSlide.Shapes.AddPicture("C:\R\jira.png", Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, 520, 480, 180, 40)
+            oSlide = Nothing
+
+
+            ' --------------------  ADD SLIDE#3 -------------------- 
+            oSlide = oPres.Slides.Add(3,  Microsoft.Office.Interop.PowerPoint.PpSlideLayout.ppLayoutChart)
+            With oSlide.Shapes.Item(1).TextFrame.TextRange
+                .Text = "Chart and Table Example"
+                .Font.Name = "Arial Black"
+                .Font.Size = 20
+                .Font.Color.RGB = RGB(255, 0, 0)
+            End With
+            Dim chrt As Microsoft.Office.Interop.Graph.Chart
+            chrt = CType(oSlide.Shapes.AddOLEObject(15, 150, 280, 150, "MSGraph.Chart.8").OLEFormat.Object, Microsoft.Office.Interop.Graph.Chart)
+
+            ' GENERATE CHART
+            Dim cArea As Microsoft.Office.Interop.Graph.ChartArea = chrt.ChartArea
+            cArea.Interior.Color = RGB(0, 0, 255)
+            With (chrt)
+                .ChartType = Microsoft.Office.Interop.Graph.XlChartType.xl3DLine
+                With .Application.DataSheet
+                    .Range("01").Value = "Tom"
+                    .Range("02").Value = "Dick"
+                    .Range("03").Value = "Harry"
+
+                    .Range("A0").Value = "2004"
+                    .Range("B0").Value = "2005"
+                    .Range("C0").Value = "2006"
+
+                End With
+            End With
+
+            ' ADD SAMPLE TABLE
+            oShape = oSlide.Shapes.AddTable(3, 3, 350, 150, 250, 150)
+
+            ' COMPANY LOGO AT BOTTOM
+            oSlide.Shapes.AddPicture("C:\R\jira.png", Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, 520, 480, 180, 40)
+            chrt = Nothing
+            oSlide = Nothing
+
+            ' --------------------  ADD SLIDE#4 -------------------- 
+            oSlide = oPres.Slides.Add(4,  Microsoft.Office.Interop.PowerPoint.PpSlideLayout.ppLayoutTitleOnly)
+            With oSlide.Shapes.Item(1).TextFrame.TextRange
+                .Text = "MARKETING - Products Launched This Month"
+                .Font.Name = "Arial Black"
+                .Font.Size = 20
+                .Font.Color.RGB = RGB(255, 0, 0)
+            End With
+
+            oShape = oSlide.Shapes.AddLine(70, 100, 650, 100) ' Y should be same
+            oShape.Line.ForeColor.RGB = RGB(255, 0, 0)
+            oShape.Line.Weight = 3
+
+            ' MODELs
+            oSlide.Shapes.AddPicture("C:\R\0s.jpg", Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, 30, 140, 100, 100)
+            oSlide.Shapes.AddPicture("C:\R\0s.jpg", Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, 190, 140, 100, 100)
+            oSlide.Shapes.AddPicture("C:\R\0s.jpg", Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, 350, 130, 120, 120)
+
+            ' MODEL DESC
+            oShape = oSlide.Shapes.AddTextbox(Microsoft.Office.Core.MsoTextOrientation.msoTextOrientationHorizontal, 30, 250, 130, 50)
+            oShape.TextEffect.Alignment = Microsoft.Office.Core.MsoTextEffectAlignment.msoTextEffectAlignmentLeft
+
+            ' REMEMBER ITEM INDEX AS YOU ADD THEM
+            With oSlide.Shapes.Item(6).TextFrame.TextRange
+                .Text = "PICTURE DESCRIPTION"
+                .Font.Name = "Arial Black"
+                .Font.Size = 12
+                .Font.Color.RGB = RGB(255, 0, 0)
+            End With
+
+            ' COMPANY LOGO AT BOTTOM
+            oSlide.Shapes.AddPicture("C:\R\jira.png", Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, 520, 480, 180, 40)
+            oSlide = Nothing
+
+
+            ' --------------------  ADD SLIDE#5 -------------------- 
+            oSlide = oPres.Slides.Add(5,  Microsoft.Office.Interop.PowerPoint.PpSlideLayout.ppLayoutTitleOnly)
+            With oSlide.Shapes.Item(1).TextFrame.TextRange
+                .Text = "Thank You For Your Visit!"
+                .Font.Name = "Arial Black"
+                .Font.Size = 20
+                .Font.Color.RGB = RGB(255, 0, 0)
+            End With
+            oShape = oSlide.Shapes.AddLine(70, 100, 650, 100) ' Y should be same
+            oShape.Line.ForeColor.RGB = RGB(255, 0, 0)
+            oShape.Line.Weight = 3
+
+            ' COMPANY LOGO AT BOTTOM
+            oSlide.Shapes.AddPicture("C:\R\jira.png", Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, 520, 480, 180, 40)
+            oSlide = Nothing
+			
+            ' ****** SAVE ******
+            oPres.SaveAs("C:\R\power2.pptx")
+
+            ' After Running Program, please close it before opening PPT file!
+        Catch ex As Exception
+            Console.WriteLine("Error Occurred !!" & Chr(10) & ex.ToString, MsgBoxStyle.Critical, "Error")
+        End Try
+		
+        oPres = Nothing
+        oApp.Quit()
+        oApp = Nothing
+        GC.Collect()		
