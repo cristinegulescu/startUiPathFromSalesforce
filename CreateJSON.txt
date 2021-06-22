@@ -1,0 +1,109 @@
+JSON1
+{
+   "name": "Jeff",
+   "id": 1,
+   "car": "BMW"
+}
+
+VB.NET1
+JObject.FromObject(
+   New With {
+        key .name = "Jeff",
+        key .id = 1,
+        key .car = "BMW"
+    }
+).ToString
+
+JSON2
+{
+   "name": "John",
+   "id": 5,
+   "car": "BMW",
+   "photo":{
+			   "height": 200,
+			   "witdh": 100
+           }
+}
+
+VB.NET2
+JObject.FromObject(
+   New With {
+        key .name = "John",
+        key .id = 5,
+        key .car = "BMW",
+		key .photo = New With{
+			           key .height = 200,
+					   key .witdh = 100
+		}
+    }
+).ToString
+
+JSON3
+{
+  "records":
+  [
+    {
+		"name": "John",
+		"id": 1
+	},
+	{
+		"name": "Tim",
+		"id": 2
+	},
+	{
+		"name": "Jeff",
+		"id": 3
+	}
+  ]
+}
+
+VB.NET3
+JObject.FromObject(
+   New With {
+		key .name = "John",
+		key .id = 1
+    }
+)
+.....
+JObject.FromObject(
+   New With {
+        key .records = JArray.FromObject(list)
+    }
+).ToString
+
+JSON4
+{
+  "records":
+  [
+    {
+		"name": "John",
+		"id": 1,
+		"cars": ["BMW","AUDI","HONDA"]
+	},
+	{
+		"name": "Tim",
+		"id": 2,
+		"cars": ["VW","SEAT","SKODA"]
+	},
+	{
+		"name": "Jeff",
+		"id": 3,
+		"cars": ["TOYOTA","MAZDA"]
+	}
+  ]
+}
+
+VB.NET4
+JObject.FromObject(
+   New With {
+		key .name = "John",
+		key .id = 1,
+		key .cars = New String() {"BMW","AUDI","HONDA"}
+    }
+)
+.....
+JObject.FromObject(
+   New With {
+        key .records = JArray.FromObject(list)
+    }
+).ToString
