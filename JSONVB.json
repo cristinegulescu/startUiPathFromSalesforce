@@ -1,0 +1,34 @@
+{
+  "records":
+  [
+    {
+		"name": "John",
+		"id": 1,
+		"age": 56,
+		"wageUSD": 90000
+	},
+	{
+		"name": "Tim",
+		"id": 2,
+		"age": 40,
+		"wageUSD": 80000
+	},
+	{
+		"name": "Jeff",
+		"id": 3,
+		"age": 25,
+		"wageUSD": 55000
+	}
+  ]
+}
+
+//Search for name
+jobj.SelectToken("$.records[?(@.name == 'Jeff')]")
+//LIST of names
+jobj.SelectTokens("$.records[?(@.age >= 23)].name")
+//SUM
+Convert.ToString(jobj("records").Sum(Function(m) CDec(m.SelectToken("wageUSD"))))
+
+//LINKS
+https://www.newtonsoft.com/json/help/html/SelectToken.htm
+https://www.newtonsoft.com/json/help/html/QueryJsonSelectTokenJsonPath.htm
