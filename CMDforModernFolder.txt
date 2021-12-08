@@ -1,0 +1,49 @@
+///GET AUTHORIZATION CMD
+CMD POST 
+https://account.uipath.com/oauth/token
+Content-Type          application/json
+X-UIPATH-TenantName   YOUR TENANTNAME
+///Body for the command
+{
+    "grant_type": "refresh_token",
+    "client_id": "YOUR CLIENT ID",
+    "refresh_token": "YOUR REFRESH TOKEN"
+}
+
+///Train code for parse JSON FOR POWER AUTOMATE
+{
+    "access_token": "test",
+    "id_token": "test",
+    "scope": "test",
+    "expires_in": 86400,
+    "token_type": "Bearer"
+}
+
+///GET the ReleaseKEY for your ProcessName  CMD GET
+https://cloud.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Releases?$filter=Name eq 'YOUR PROCESS NAME'
+Content-Type                 application/json
+X-UIPATH-TenantName          YOUR TENANTNAME
+X-UIPATH-OrganizationId      GET DATA FROM WEBPAGE LINK
+Authorization 
+Bearer VariableFromAuthCMD
+
+To TRAIN the POWERAUTOMATE JSON use data from HERE:
+https://postman.uipath.rocks/#6095bd31-0487-4bf5-bfab-e60574dbab31
+
+/// SEND START JOB POST CMD
+https://cloud.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs
+Content-Type                 application/json
+X-UIPATH-TenantName          YOUR TENANTNAME
+X-UIPATH-OrganizationUnitId  DATA FROM GET CMD
+Authorization 
+Bearer VariableFromAuthCMD
+
+/// Body for Command
+{
+    "startInfo": {
+        "ReleaseKey": "RELEASE KEY FROM GET CMD",
+        "Strategy": "ModernJobsCount",
+        "JobsCount": 1,
+        "InputArguments": "{}"
+    }
+}
