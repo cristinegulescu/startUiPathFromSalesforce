@@ -1,0 +1,90 @@
+Private Sub Application_Startup()
+
+    Dim olNs As Outlook.NameSpace
+    Dim Inbox As Outlook.MAPIFolder
+    Dim Items As Outlook.Items
+    Dim Filter As String
+    Dim olReply As MailItem
+    
+    Dim req As New MSXML2.ServerXMLHTTP60
+ Dim Body As String
+ Dim myUrl As String
+ Dim Resp As String
+ Dim Tmp As String
+ Dim ProcId As String
+ Dim Auth As String
+ Dim param1 As String
+ Dim param2 As String
+ Dim param3 As String
+
+    Set olNs = Application.GetNamespace("MAPI")
+    Set Inbox = olNs.GetDefaultFolder(olFolderInbox)
+
+    Filter = "@SQL=" & Chr(34) & "urn:schemas:httpmail:read" & _
+                       Chr(34) & "=0"
+                       
+                              'AUTH TOKEN
+ Body = "{""grant_type"": ""refresh_token"",""client_id"": ""YOUR CLIENT ID"",""refresh_token"": ""YOUR REFRESH TOKEN""}"
+ myUrl = "https://account.uipath.com/oauth/token"
+ req.Open "POST", myUrl, False
+ req.SetRequestHeader "Content-Type", "application/json"
+ req.SetRequestHeader "X-UIPATH-TenantName", "YOUR TENANT NAME"
+ req.Send Body
+ Resp = req.ResponseText
+ Auth = "Bearer " + Mid(Resp, InStr(Resp, "access_token") + 15, InStr(Resp, "id_token") - 21)
+
+    Set Items = Inbox.Items.Restrict(Filter)
+
+    For Each item In Items
+    
+ param1 = item.Subject
+ param2 = item.SenderEmailAddress
+ param3 = item.Body
+ 
+ 'Start PROCESS
+ myUrl = "https://platform.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs"
+ Body = "{""startInfo"":{""ReleaseKey"": ""YOUR PROCESS ReleaseKey from GET CMD"",""Strategy"": ""All"",""InputArguments"": ""{\""in_par1\"":\""" + param1 + "\"",\""in_par2\"":\""" + param2 + "\"",\""in_par3\"":\""" + param3 + "\""}""}}"
+ 
+ req.Open "POST", myUrl, False
+ req.SetRequestHeader "Content-Type", "application/json"
+ req.SetRequestHeader "X-UIPATH-TenantName", "YOUR TENANT NAME"
+  req.SetRequestHeader "X-UIPATH-OrganizationUnitId", "YOUR UnitId from GET CMD"
+ req.SetRequestHeader "Authorization", Auth
+ req.Send Body
+ Resp = req.ResponseText
+ Tmp = Right(Resp, Len(Resp) - InStrRev(Resp, "Id") - 3)
+ ProcId = Left(Tmp, Len(Tmp) - 3)
+ 
+ myUrl = "https://platform.uipath.com/[Account Logical Name]/[Tenant Logical Name]/odata/Jobs?$filter=Id eq " + ProcId
+ Dim i As Integer
+    i = 1
+'LOOP to see that process is done
+ Do While i < 12
+    'Application.Wait (Now + TimeValue("0:00:05"))
+    
+    req.Open "GET", myUrl, False
+    req.SetRequestHeader "Content-Type", "application/json"
+    req.SetRequestHeader "X-UIPATH-TenantName", "YOUR TENANT NAME"
+    req.SetRequestHeader "Authorization", Auth
+    req.Send Body
+    Resp = req.ResponseText
+    Tmp = Mid(Resp, InStr(Resp, "State") + 8, InStr(Resp, "JobPriority") - InStr(Resp, "State") - 11)
+    Tmp = LCase(Tmp)
+    If (Tmp = "successful") Then i = 20
+    i = i + 1
+ Loop
+
+'REPLY to EMAIL with robot RESULT
+ Tmp = Mid(Resp, InStr(Resp, "OutputArguments") + 18, InStr(Resp, "HostMachineName") - InStr(Resp, "OutputArguments") - 21)
+ Tmp = Mid(Tmp, 17, Len(Tmp) - 19)
+           Set olReply = item.ReplyAll
+            olReply.HTMLBody = "Hello, Here is the response from UiPath Robot " & vbCrLf & Tmp
+        olReply.Display
+        olReply.Send
+        item.UnRead = False
+    Next item
+ 
+End Sub
+
+
+
