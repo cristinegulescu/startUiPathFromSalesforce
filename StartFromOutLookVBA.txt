@@ -1,3 +1,4 @@
+Private Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
 Private Sub Application_Startup()
 
     Dim olNs As Outlook.NameSpace
@@ -60,7 +61,7 @@ Private Sub Application_Startup()
     i = 1
 'LOOP to see that process is done
  Do While i < 12
-    'Application.Wait (Now + TimeValue("0:00:05"))
+    Sleep 5000
     
     req.Open "GET", myUrl, False
     req.SetRequestHeader "Content-Type", "application/json"
@@ -85,6 +86,9 @@ Private Sub Application_Startup()
     Next item
  
 End Sub
+
+'BONUS COMMAND for local ROBOT
+'Call Shell("C:\Program Files\UiPath\Studio\UiRobot.exe -file C:\test\ProcTeam\Main.xaml -input ""{'in_par1':'" + param1 + "'}""", vbNormalFocus)
 
 
 
