@@ -1,0 +1,127 @@
+Oauth 2
+EndPoint:  https://login.salesforce.com/services/oauth2/token
+
+Method: POST
+
+Parameters:
+grand_type         "password"
+username           Your username
+password           Your password + Security Token 
+client_id          Your Client ID
+client_secret      Your Client Secret
+
+jrez("access_token").ToString
+jrez("instance_url").ToString
+
+GET DATA running SOQL
+EndPoint: jrez("instance_url").ToString+
+"/services/data/v42.0/query?q=YOUR QUERY"
+Method: GET
+Hearders: Authorization   jrez("access_token").ToString 
+
+QUERY Example: SELECT Name,Id FROM Account
+
+Create / Insert
+EndPoint: jrez("instance_url").ToString+
+"/services/data/v42.0/sobjects/"+"YOUR OBJECT"
+Method: POST
+Hearders: Authorization   jrez("access_token").ToString 
+
+Body:         json.ToString
+BodyFormat:   application/json
+
+Example JSON IN:
+{
+  "Name" : "Express Logistics and Transport"
+}
+
+Example JSON OUT:
+{
+  "id" : "001D000000IqhSLIAZ",
+  "errors" : [ ],
+  "success" : true
+}
+
+Update
+EndPoint: jrez("instance_url").ToString+
+"/services/data/v42.0/sobjects/"+"YOUR OBJECT"+"/"+"YOUR OBJECT ID"
+Method: PATCH
+Hearders: Authorization   jrez("access_token").ToString 
+
+Body:         json.ToString
+BodyFormat:   application/json
+
+Example JSON IN:
+{
+  "Name" : "Express Logistics and Transport"
+}
+
+DELETE cmd
+EndPoint: jrez("instance_url").ToString+
+"/services/data/v42.0/sobjects/"+"YOUR OBJECT"+"/"+"YOUR OBJECT ID"
+Method: DELETE
+Hearders: Authorization   jrez("access_token").ToString 
+
+Upload files
+EndPoint: jrez("instance_url").ToString+
+"/services/data/v42.0/sobjects/ContentVersion"
+ 
+Method: POST
+Hearders: Authorization   jrez("access_token").ToString 
+
+Body:         json.ToString
+BodyFormat:   application/json
+
+Example JSON IN:
+    {"PathOnClient": "C:\R\0.jpg"
+	 "Title": 110.jpg",
+     "VersionData": Convert.ToBase64String(bytes)}
+
+GET ContentDocumentId
+EndPoint: jrez("instance_url").ToString+
+"/services/data/v42.0/query?q=
+SELECT ContentDocumentId FROM ContentVersion WHERE Title'"+docName+"‘
+Method: GET
+Hearders: Authorization   jrez("access_token").ToString 
+
+ASSIGN the FILE to CASE
+EndPoint: jrez("instance_url").ToString+
+"/services/data/v42.0/sobjects/ContentDocumentLink
+Method: POST
+Hearders: Authorization   jrez("access_token").ToString 
+
+Body:         json.ToString
+BodyFormat:   application/json
+
+Example JSON IN:
+ { "ContentDocumentId": "The ID from GET function",
+   "LinkedEntityId": "CASE ID",
+   "ShareType" : "V"}
+ 
+Download FILE
+EndPoint: jrez("instance_url").ToString+
+"/services/data/v42.0/query?q=SELECT ContentDocumentId 
+FROM ContentVersion WHERE FirstPUblishLocationId='YOUR CASE ID'"
+Method: GET
+Hearders: Authorization   jrez("access_token").ToString 
+
+CType(jrez("records"),JArray)
+
+Get file details
+EndPoint: jrez("instance_url").ToString+
+"/services/data/v42.0/query?q=SELECT FileExtension,Title, VersionData
+FROM ContentVersion
+WHERE ContentDocumentId=‘"+item("ContentDocumentId").ToString+
+"' AND IsLatest = true"
+
+Method: GET
+Hearders: Authorization   jrez("access_token").ToString 
+
+Download file url
+EndPoint: jrez("instance_url").ToString+
+  item2("VersionData").ToString
+ 
+Method: POST
+Hearders: Authorization   jrez("access_token").ToString 
+
+"C:\1\"+item2("Title").ToString+"."+item2("FileExtension").ToString
