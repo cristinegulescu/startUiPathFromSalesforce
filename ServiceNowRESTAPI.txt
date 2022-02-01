@@ -1,0 +1,113 @@
+Oauth 2
+EndPoint:  https://devXXXXX.service-now.com/oauth_token.do
+
+Method: POST
+Hearders: Content-Type   "application/x-www-form-urlencoded"
+          Cache-Control  "no-cache"
+
+Parameters:
+grand_type         "password"
+username           Your username
+password           Your password
+client_id          Your Client ID
+client_secret      Your Client Secret
+
+jrez("access_token").ToString
+
+GET DATA 
+EndPoint: https://devXXXXX.service-now.com/api/now/table/incident
+example2: https://devXXXXX.service-now.com/api/now/table/incident?
+sysparm_limit=10&sysparm_query=numberLIKE002
+Method: GET
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+
+Create / Insert
+EndPoint: https://devXXXXX.service-now.com/api/now/table/
++"YOUR OBJECT"
+Method: POST
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+Body:         json.ToString
+BodyFormat:   application/json
+
+Example JSON IN:
+{
+  "short_description" : "Test for insert"
+}
+
+Example JSON OUT:
+{
+  "sys_id" : "001D000000IqhSLIAZ",
+  ...
+}
+
+Update
+EndPoint: https://devXXXXX.service-now.com/api/now/table/
++"YOUR OBJECT"+/+"YOUR SYS ID"
+Method: PUT
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+Body:         json.ToString
+BodyFormat:   application/json
+
+Example JSON IN:
+{
+  "short_description" : "Test Short"
+}
+
+DELETE cmd
+EndPoint: https://devXXXXX.service-now.com/api/now/table/
++"YOUR OBJECT"+/+"YOUR SYS ID"
+Method: DELETE
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+Upload files
+EndPoint: https://devXXXXX.service-now.com/api/now/table/incident?
+sysparm_limit=1&sysparm_query=number=INC0010002
+Method: GET
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+sys_id = jrez("sys_id").ToString
+
+Upload and the FILE and Assign To incident
+EndPoint: https://devXXXXX.service-now.com/api/now/table/ecc_queue
+Method: POST
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+Body:         json.ToString
+BodyFormat:   application/json
+
+Byte[] bytes = File.ReadAllBytes(nameDecision);
+Example JSON IN:
+{  "agent": "AttachmentCreator",
+   "topic": "AttachmentCreator",
+   "source": OBJECTNAME+":"+YOURITEM_SysID,
+   "name": "YOUR FILE NAME",
+   "payload": Convert.ToBase64String(bytes)
+}
+
+ 
+Download FILE
+EndPoint: https://devXXXXX.service-now.com/api/now/table/incident?
+sysparm_limit=1&sysparm_query=number=INC0010002
+Method: GET
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+sys_id = jrez("sys_id").ToString
+
+Get file details
+EndPoint:https://devXXXXX.service-now.com/api/now/table/attachment?
+sysparm_action=GetRecords&sysparm_fields=sys_id&
+sysparm_query=table_sys_id="+sys_id 
+
+Method: GET
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+Download file url
+EndPoint: item("download_link").ToString
+ 
+Method: POST
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+"C:\1\"+item2("file_name").ToString
