@@ -1,0 +1,145 @@
+Oauth 2
+EndPoint:  https://auth.atlassian.com/oauth/token
+
+Method: POST
+
+Parameters:
+grand_type         "refresh_token"
+client_id          Your Client ID
+client_secret      Your Client Secret
+refresh_token      Your refresh_token
+
+jrez("access_token").ToString
+
+GET DATA execute JQL
+EndPoint: https://XXXXX.atlassian.net/rest/api/latest/search
+Method: POST
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+Body:         json.ToString
+BodyFormat:   application/json
+
+Example JSON IN:
+{
+  "jql" : "YOUR JQL",
+  "maxResults" : 20
+}
+
+JQL example "issuetype=BUG"
+
+CType(jrez("issues"),JArray)
+
+Create / Insert
+EndPoint: https://XXXXX.atlassian.net/rest/api/latest/issue
+Method: POST
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+Body:         json.ToString
+BodyFormat:   application/json
+
+Example JSON IN:
+{
+    "fields": {
+       "project":
+       {
+          "key": "TEST"
+       },
+       "summary": "REST ye merry gentlemen.",
+       "description": "Creating of an issue using project keys and issue type names using the REST API",
+       "issuetype": {
+          "name": "Bug"
+       }
+   }
+}
+
+Example JSON OUT:
+{
+   "id":"39000",
+   "key":"TEST-101",
+    "self":"http://localhost:8080/rest/api/2/issue/39000"
+}
+
+Update
+EndPoint: https://XXXXX.atlassian.net/rest/api/latest/issue/"Issue Number"
+Example of "Issue Number": UI-45708
+Method: PUT
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+Body:         json.ToString
+BodyFormat:   application/json
+
+Example JSON IN:
+{
+   "fields": {
+       "assignee":{"name":"charlie"}
+   }
+}
+
+DELETE cmd
+EndPoint: https://XXXXX.atlassian.net/rest/api/latest/issue/"Issue Number"
+Example of "Issue Number": UI-45708
+Method: DELETE
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+Upload files
+EndPoint: https://XXXXX.atlassian.net/rest/api/latest/issue/"YOUR ISSUE ID"/attachments
+Method: POST
+Hearders: Authorization      "Bearer "+jrez("access_token").ToString 
+          X-Atlassian-Token  "no-check"
+		  
+Attachments:  file   "C:\1\Your File.txt"		  
+Body:         json.ToString
+BodyFormat:   application/json
+
+ 
+Download FILE
+EndPoint: https://XXXXX.atlassian.net/rest/api/latest/search
+Method: POST
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+Body:         json.ToString
+BodyFormat:   application/json
+
+Example JSON IN:
+{
+  "jql" : "YOUR JQL",
+  "maxResults" : 1,
+  "fields":[attachment]
+}
+
+JQL example "key=UI-97076"
+
+CType(jrez("issues"),JArray)
+CType(jrez("fields"),JArray)
+CType(jrez("attachments"),JArray)
+
+
+Download file url
+EndPoint: item("content").ToString
+ 
+Method: POST
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+"C:\1\"+item2("file_name").ToString
+
+Create an internal comment
+EndPoint: https://XXXXX.atlassian.net/rest/api/latest/issue/"YOUR ISSUE ID"/comment
+Method: POST
+Hearders: Authorization   "Bearer "+jrez("access_token").ToString 
+
+Body:         json.ToString
+BodyFormat:   application/json
+
+Example JSON IN:
+{
+    "body": "Your New comment Here",
+    "properties": [
+	{
+        "key": "sd.public.comment",
+        "value": {
+            "internal": true
+        }
+    }
+	]
+}
+
