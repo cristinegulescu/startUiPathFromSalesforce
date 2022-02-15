@@ -1,0 +1,29 @@
+{
+"inputs" : 
+    [
+		{
+			"objectId"    : "kA0RM00000004pP0AQ",
+			"comment"     : "Test Youtube",
+			"submitterId" : "ABDGHJUHUB19028937"
+		}
+	]
+}
+
+Build JSON Object
+
+JObject.FromObject(
+   New With {
+		key .objectId = "kA0RM00000004pP0AQ",
+		key .comment = "Test Youtube",
+		key .submitterId = "ABDGHJUHUB19028937"
+    }
+)
+
+Build JSON with array
+
+JObject.FromObject(
+   New With {
+        key .inputs = JArray.FromObject(list)
+    }
+).ToString
+
