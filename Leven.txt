@@ -1,0 +1,40 @@
+ Dim n As Integer = str1.Length
+        Dim m As Integer = str2.Length
+        Dim d(n + 1, m + 1) As Integer
+		decision =False
+
+        If n = 0 Then
+            nr= m
+		Else If m = 0 Then
+            nr= n
+        Else 
+        Dim i As Integer
+        Dim j As Integer
+
+        For i = 0 To n
+            d(i, 0) = i
+        Next
+
+        For j = 0 To m
+            d(0, j) = j
+        Next
+
+        For i = 1 To n
+            For j = 1 To m
+
+                Dim cost As Integer
+                If str2(j - 1) = str1(i - 1) Then
+                    cost = 0
+                Else
+                    cost = 1
+                End If
+
+                d(i, j) = Math.Min(Math.Min(d(i - 1, j) + 1, d(i, j - 1) + 1),
+                                   d(i - 1, j - 1) + cost)
+            Next
+        Next
+nr = d(n, m)
+End If
+If (Math.Truncate((nr * 100) / str1.Length) <= (100-percent)) 
+	decision = True
+End If
