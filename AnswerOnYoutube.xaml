@@ -1,0 +1,313 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="760.4,2266.8" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:uasc="clr-namespace:UiPath.Activities.System.Collections;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="31">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Activities.System.Collections</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="44">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="770.4,2201.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;Action Center&quot;,&quot;AI Center&quot;,&quot;API for Beginners&quot;,&quot;Beginers&quot;,&quot;DataTable&quot;,&quot;Document Understanding&quot;,&quot;Excel&quot;,&quot;LINQ&quot;,&quot;List and Dictionary&quot;,&quot;Object Repository&quot;,&quot;PDF&quot;,&quot;Reframework&quot;,&quot;SAP&quot;,&quot;State Machine&quot;,&quot;String and DateTime&quot;,&quot;Try Catch Full&quot;,&quot;UiPath Orchestrator&quot;,&quot;Unattended Robot Modern Folder&quot;,&quot;XML&quot;})]" Name="listC" />
+      <Variable x:TypeArguments="scg:List(scg:List(x:String))" Default="[new List(of List(of String))]" Name="ListOfList" />
+      <Variable x:TypeArguments="scg:List(scg:List(x:String))" Default="[new List(of List(of String))]" Name="ListOfYou" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;3 ways to complete an External Tasks&quot;,&quot;A tour of our environment&quot;,&quot;Assigning tasks to users in code&quot;,&quot;Build an automation that completes a task in Action Center&quot;,&quot;Build an automation that creates a task in Action Center&quot;,&quot;Completing a Task in Action Center&quot;,&quot;Completing our first Task in Action Center&quot;,&quot;Designing a Form&quot;,&quot;Development Demo&quot;,&quot;Form Tasks vs. External Tasks&quot;,&quot;Orchestrator Mobile App&quot;,&quot;Publish automation to Orchestrator&quot;,&quot;Running the 'Task Completer' automation&quot;,&quot;Running the automation from Orchestrator&quot;,&quot;Settings in Automation Cloud&quot;,&quot;Task Action (Task Results)&quot;,&quot;Task Catalogs&quot;,&quot;Waiting for a Form Task to complete&quot;,&quot;What is Action Center?&quot;})]" Name="l1" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;MVXDQEVhWzA?t=142&quot;,&quot;MVXDQEVhWzA?t=195&quot;,&quot;U0GtNdxLDRc?t=351&quot;,&quot;MVXDQEVhWzA?t=745&quot;,&quot;MVXDQEVhWzA?t=235&quot;,&quot;BESSUT20Fdc?t=498&quot;,&quot;MVXDQEVhWzA?t=610&quot;,&quot;BESSUT20Fdc?t=276&quot;,&quot;BESSUT20Fdc?t=107&quot;,&quot;MVXDQEVhWzA?t=100&quot;,&quot;BESSUT20Fdc?t=544&quot;,&quot;MVXDQEVhWzA?t=525&quot;,&quot;MVXDQEVhWzA?t=864&quot;,&quot;MVXDQEVhWzA?t=594&quot;,&quot;BESSUT20Fdc?t=67&quot;,&quot;U0GtNdxLDRc?t=177&quot;,&quot;U0GtNdxLDRc?t=68&quot;,&quot;BESSUT20Fdc?t=390&quot;,&quot;BESSUT20Fdc?t=32&quot;})]" Name="y1" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;Activating AiFabric in the UiPath Platform&quot;,&quot;Adding a model/package&quot;,&quot;Adding a Training dataset&quot;,&quot;Adding an Evaluation dataset&quot;,&quot;Creating a Pipeline for training&quot;,&quot;Creating a project&quot;,&quot;Machine Learning concepts&quot;})]" Name="l2" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;d7HoikidKPU?t=217&quot;,&quot;d7HoikidKPU?t=295&quot;,&quot;d7HoikidKPU?t=366&quot;,&quot;d7HoikidKPU?t=508&quot;,&quot;d7HoikidKPU?t=435&quot;,&quot;d7HoikidKPU?t=270&quot;,&quot;d7HoikidKPU?t=22&quot;})]" Name="y2" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;API Documentation&quot;,&quot;API Example in UiPath&quot;,&quot;API Kinds&quot;,&quot;API Types&quot;,&quot;Burger Example&quot;,&quot;Google Maps API&quot;,&quot;How Web Works?&quot;,&quot;HTTP Request Parameters&quot;,&quot;HTTP Request Wizard&quot;,&quot;HTTP Response Status&quot;,&quot;OpenWeather API&quot;,&quot;POST Example&quot;,&quot;Request Methods&quot;,&quot;REST-API&quot;,&quot;Spotify API&quot;,&quot;Summary&quot;,&quot;UiPath API Package&quot;,&quot;URI | URL | URN&quot;,&quot;URL Segment&quot;})]" Name="l3" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;iZiwhhniDl0?t=2114&quot;,&quot;iZiwhhniDl0?t=1366&quot;,&quot;iZiwhhniDl0?t=2024&quot;,&quot;iZiwhhniDl0?t=2054&quot;,&quot;iZiwhhniDl0?t=108&quot;,&quot;iZiwhhniDl0?t=1100&quot;,&quot;iZiwhhniDl0?t=267&quot;,&quot;iZiwhhniDl0?t=1582&quot;,&quot;iZiwhhniDl0?t=1229&quot;,&quot;iZiwhhniDl0?t=756&quot;,&quot;iZiwhhniDl0?t=1013&quot;,&quot;iZiwhhniDl0?t=637&quot;,&quot;iZiwhhniDl0?t=483&quot;,&quot;iZiwhhniDl0?t=842&quot;,&quot;iZiwhhniDl0?t=1143&quot;,&quot;iZiwhhniDl0?t=694&quot;,&quot;iZiwhhniDl0?t=1182&quot;,&quot;iZiwhhniDl0?t=287&quot;,&quot;iZiwhhniDl0?t=1652&quot;})]" Name="y3" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[New List(Of String)({&quot;Applications and Selectors&quot;,&quot;Browser Automation&quot;,&quot;Excel and Data Tables&quot;,&quot;File Handling&quot;,&quot;If/While&quot;,&quot;Install UiPath and connect to Orchestrator&quot;,&quot;Our first UiPath Robot&quot;,&quot;Start UiPath&quot;,&quot;Variables&quot;,&quot;Web/Data Scraping to Excel&quot;})]" Name="l4" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;sp5ZwFKfh-0?t=4026&quot;,&quot;sp5ZwFKfh-0?t=4747&quot;,&quot;sp5ZwFKfh-0?t=3208&quot;,&quot;sp5ZwFKfh-0?t=5522&quot;,&quot;sp5ZwFKfh-0?t=2430&quot;,&quot;sp5ZwFKfh-0?t=68&quot;,&quot;sp5ZwFKfh-0?t=238&quot;,&quot;sp5ZwFKfh-0?t=215&quot;,&quot;sp5ZwFKfh-0?t=1344&quot;,&quot;sp5ZwFKfh-0?t=6235&quot;})]" Name="y4" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;Access individual elements&quot;,&quot;Add Data Column&quot;,&quot;Add Data Row&quot;,&quot;Build Data Table&quot;,&quot;Check if DataTable is Empty&quot;,&quot;Clear Data Table&quot;,&quot;Clone DataTable&quot;,&quot;Filter data for multiple fake spaces before Generate DataTable&quot;,&quot;Filter Data Table&quot;,&quot;Filter data with multiple spaces inside of column&quot;,&quot;For Each Row&quot;,&quot;Generate Data Table&quot;,&quot;Get Row Item&quot;,&quot;Join Data Tables&quot;,&quot;Lookup Data Table&quot;,&quot;Merge Data Table&quot;,&quot;Output Data Table&quot;,&quot;Print data from DataTable&quot;,&quot;Read DataTable from Excel&quot;,&quot;Remove Data Column&quot;,&quot;Remove Data Row&quot;,&quot;Remove Duplicate Rows&quot;,&quot;Sort Data Table&quot;,&quot;Update value in DataTable&quot;,&quot;What is a Data Table?&quot;})]" Name="l5" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;PydU5WPeaVo?t=260&quot;,&quot;T9FAg__-Gd4?t=388&quot;,&quot;T9FAg__-Gd4?t=316&quot;,&quot;T9FAg__-Gd4?t=85&quot;,&quot;PydU5WPeaVo?t=888&quot;,&quot;T9FAg__-Gd4?t=1595&quot;,&quot;PydU5WPeaVo?t=710&quot;,&quot;PydU5WPeaVo?t=1980&quot;,&quot;T9FAg__-Gd4?t=674&quot;,&quot;PydU5WPeaVo?t=2300&quot;,&quot;T9FAg__-Gd4?t=186&quot;,&quot;T9FAg__-Gd4?t=916&quot;,&quot;T9FAg__-Gd4?t=1380&quot;,&quot;T9FAg__-Gd4?t=1118&quot;,&quot;T9FAg__-Gd4?t=1250&quot;,&quot;T9FAg__-Gd4?t=755&quot;,&quot;T9FAg__-Gd4?t=1542&quot;,&quot;PydU5WPeaVo?t=108&quot;,&quot;PydU5WPeaVo?t=85&quot;,&quot;T9FAg__-Gd4?t=1217&quot;,&quot;T9FAg__-Gd4?t=1485&quot;,&quot;T9FAg__-Gd4?t=865&quot;,&quot;T9FAg__-Gd4?t=592&quot;,&quot;PydU5WPeaVo?t=530&quot;,&quot;T9FAg__-Gd4?t=45&quot;})]" Name="y5" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;Brief explanation of Document Understanding phases&quot;,&quot;Classification&quot;,&quot;Create loop for each document&quot;,&quot;Data Extraction Scope&quot;,&quot;Digitize document&quot;,&quot;Export extraction to Excel&quot;,&quot;Form extractor&quot;,&quot;Invoce Case - Classify Document Scope&quot;,&quot;Invoce Case - Data Extraction Scope&quot;,&quot;Invoce Case - Export Extraction Results&quot;,&quot;Invoce Case - Load Taxonomy&quot;,&quot;Invoce Case - Present Validation Station&quot;,&quot;Invoce Case - Read our invoice&quot;,&quot;Invoce Case - Scale the solution&quot;,&quot;Invoce Case - Specify the OCR Engine&quot;,&quot;Machine Learning extractor&quot;,&quot;Packages installation&quot;,&quot;PDF Table - Build DataTable for output data&quot;,&quot;PDF Table - Data Extraction Scope&quot;,&quot;PDF Table - Digitize Document&quot;,&quot;PDF Table - Export Extraction Results&quot;,&quot;PDF Table - Extract multiple PDF files&quot;,&quot;PDF Table - Iterate through our output and add data&quot;,&quot;PDF Table - Load Taxonomy&quot;,&quot;PDF Table - Merge Data Table&quot;,&quot;PDF Table - Understand the output data&quot;,&quot;PDF Table - Write the extracted to Excel&quot;,&quot;Taxonomy&quot;})]" Name="l6" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;d4qt5UvlZdM?t=48&quot;,&quot;d4qt5UvlZdM?t=1050&quot;,&quot;d4qt5UvlZdM?t=647&quot;,&quot;d4qt5UvlZdM?t=1539&quot;,&quot;d4qt5UvlZdM?t=723&quot;,&quot;d4qt5UvlZdM?t=2333&quot;,&quot;d4qt5UvlZdM?t=1710&quot;,&quot;cp1hbChzUQ4?t=388&quot;,&quot;cp1hbChzUQ4?t=584&quot;,&quot;cp1hbChzUQ4?t=845&quot;,&quot;cp1hbChzUQ4?t=130&quot;,&quot;cp1hbChzUQ4?t=778&quot;,&quot;cp1hbChzUQ4?t=276&quot;,&quot;cp1hbChzUQ4?t=1063&quot;,&quot;cp1hbChzUQ4?t=372&quot;,&quot;d4qt5UvlZdM?t=1950&quot;,&quot;d4qt5UvlZdM?t=131&quot;,&quot;WPKEJLW7_Js?t=962&quot;,&quot;WPKEJLW7_Js?t=413&quot;,&quot;WPKEJLW7_Js?t=317&quot;,&quot;WPKEJLW7_Js?t=803&quot;,&quot;WPKEJLW7_Js?t=1226&quot;,&quot;WPKEJLW7_Js?t=1074&quot;,&quot;WPKEJLW7_Js?t=145&quot;,&quot;WPKEJLW7_Js?t=1028&quot;,&quot;WPKEJLW7_Js?t=830&quot;,&quot;WPKEJLW7_Js?t=1142&quot;,&quot;d4qt5UvlZdM?t=233&quot;})]" Name="y6" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;Copy Range and Auto Fill Range&quot;,&quot;Create Table and Pivot Table, also Refresh Pivot Table&quot;,&quot;Delete Column from Table&quot;,&quot;Delete Rows and Columns&quot;,&quot;Excel Application scope and Read and Write Range&quot;,&quot;Execute Macro&quot;,&quot;Get Cell Color and Set Range Color&quot;,&quot;Get Selected Range, Append Range, Delete Range and Select Range&quot;,&quot;Get Workbook Sheet and Get Workbook Sheets&quot;,&quot;Insert Column in Table and Filter Table&quot;,&quot;Insert Rows and Columns&quot;,&quot;Invoke VBA&quot;,&quot;LookUp Range&quot;,&quot;Read Cell, Formula, Row and Column and Write Cell&quot;,&quot;Read, Write and Append CSV&quot;,&quot;Remove Duplicate Range&quot;,&quot;Sort DataTable and Get Table Range&quot;,&quot;Workbook Append Range&quot;,&quot;Workbook Get Table Range&quot;,&quot;Workbook Read and Write Range&quot;,&quot;Workbook Read Cell, Formula, Row and Column&quot;,&quot;Workbook Write Cell&quot;})]" Name="l7" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;aHOEsHDFZCo?t=2035&quot;,&quot;aHOEsHDFZCo?t=1760&quot;,&quot;aHOEsHDFZCo?t=1615&quot;,&quot;aHOEsHDFZCo?t=2010&quot;,&quot;aHOEsHDFZCo?t=80&quot;,&quot;aHOEsHDFZCo?t=2470&quot;,&quot;aHOEsHDFZCo?t=1390&quot;,&quot;aHOEsHDFZCo?t=1105&quot;,&quot;aHOEsHDFZCo?t=1280&quot;,&quot;aHOEsHDFZCo?t=1650&quot;,&quot;aHOEsHDFZCo?t=1925&quot;,&quot;aHOEsHDFZCo?t=2610&quot;,&quot;aHOEsHDFZCo?t=2185&quot;,&quot;aHOEsHDFZCo?t=1020&quot;,&quot;aHOEsHDFZCo?t=205&quot;,&quot;aHOEsHDFZCo?t=2390&quot;,&quot;aHOEsHDFZCo?t=1490&quot;,&quot;aHOEsHDFZCo?t=570&quot;,&quot;aHOEsHDFZCo?t=875&quot;,&quot;aHOEsHDFZCo?t=440&quot;,&quot;aHOEsHDFZCo?t=620&quot;,&quot;aHOEsHDFZCo?t=780&quot;})]" Name="y7" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;LINQ Array&quot;,&quot;LINQ DataTables&quot;,&quot;LINQ Group&quot;,&quot;LINQ Join&quot;,&quot;LINQ Order&quot;,&quot;LINQ XML&quot;,&quot;Parts of LINQ Query&quot;,&quot;What is LINQ?&quot;})]" Name="l8" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;2FlgUDtOoVc?t=293&quot;,&quot;2FlgUDtOoVc?t=770&quot;,&quot;2FlgUDtOoVc?t=1488&quot;,&quot;2FlgUDtOoVc?t=2203&quot;,&quot;2FlgUDtOoVc?t=1838&quot;,&quot;2FlgUDtOoVc?t=1030&quot;,&quot;2FlgUDtOoVc?t=80&quot;,&quot;2FlgUDtOoVc?t=62&quot;})]" Name="y8" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;Access data very fast from the dictionary&quot;,&quot;Add data to a dictionary&quot;,&quot;Add to Collections&quot;,&quot;Check if elements from the list are unique&quot;,&quot;Check if we have all the elements inside of a list&quot;,&quot;Check if we have at least one element inside of the list that matches&quot;,&quot;Check if we have multiple values in the same list&quot;,&quot;Compare List with Missing or Extra elements&quot;,&quot;Define dictionary&quot;,&quot;Dictionary&quot;,&quot;Install Dictionary activities&quot;,&quot;List (Collections)&quot;,&quot;Make Sum of the same element from a list&quot;,&quot;Sort List&quot;,&quot;Use Dictionary instead of multiple IFs&quot;})]" Name="l9" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;k01WX3g7lY0?t=1170&quot;,&quot;k01WX3g7lY0?t=835&quot;,&quot;k01WX3g7lY0?t=165&quot;,&quot;k01WX3g7lY0?t=1363&quot;,&quot;k01WX3g7lY0?t=310&quot;,&quot;k01WX3g7lY0?t=520&quot;,&quot;k01WX3g7lY0?t=1248&quot;,&quot;k01WX3g7lY0?t=1730&quot;,&quot;k01WX3g7lY0?t=768&quot;,&quot;k01WX3g7lY0?t=660&quot;,&quot;k01WX3g7lY0?t=690&quot;,&quot;k01WX3g7lY0?t=104&quot;,&quot;k01WX3g7lY0?t=1428&quot;,&quot;k01WX3g7lY0?t=210&quot;,&quot;k01WX3g7lY0?t=935&quot;})]" Name="y9" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;Activating Modern Design Experience and Object Repository&quot;,&quot;Automation using a descriptors library&quot;,&quot;Breaking four working automations&quot;,&quot;Capturing UI Elements&quot;,&quot;Defining anchors&quot;,&quot;Demo - Traditional selectors&quot;,&quot;Deploying the repaired descriptor&quot;,&quot;Exporting descriptors to a library&quot;,&quot;Problems with traditional selectors&quot;,&quot;Repairing a broken descriptor&quot;,&quot;Running four working automations&quot;,&quot;Using element descriptors in an automation&quot;,&quot;Using the Project Dependencies Mass Update Tool&quot;})]" Name="l10" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;Zs_cUJ2k_N4?t=236&quot;,&quot;AdgptyMfndo?t=70&quot;,&quot;AdgptyMfndo?t=175&quot;,&quot;Zs_cUJ2k_N4?t=300&quot;,&quot;Zs_cUJ2k_N4?t=425&quot;,&quot;Zs_cUJ2k_N4?t=155&quot;,&quot;AdgptyMfndo?t=311&quot;,&quot;Zs_cUJ2k_N4?t=566&quot;,&quot;Zs_cUJ2k_N4?t=20&quot;,&quot;AdgptyMfndo?t=244&quot;,&quot;AdgptyMfndo?t=125&quot;,&quot;Zs_cUJ2k_N4?t=481&quot;,&quot;AdgptyMfndo?t=360&quot;})]" Name="y10" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;Extract Images From PDF and Export PDF as Image&quot;,&quot;Extract Table from complex PDF use-cases 3 unstructured data the logic will be based on IsUpper and IsLower&quot;,&quot;Extract Table from other PDF use-cases 2 delimiter is 2*spaces ' ' easy split&quot;,&quot;Extract table from PDF use-cases 1 replace some spaces with | (one column has multiple words)&quot;,&quot;Extract the price value from PDF&quot;,&quot;Install PDF Activities&quot;,&quot;Join PDF and Manage PDF passwords&quot;,&quot;READ PDF text, Get PDF page count, Extract PDF&quot;,&quot;Read PDF with OCR&quot;,&quot;PDF Table Regex - add data row&quot;,&quot;PDF Table Regex - find matches&quot;,&quot;PDF Table Regex - iterate&quot;,&quot;PDF Table Regex - limitations&quot;})]" Name="l11" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;HoatIPJfC3U?t=570&quot;,&quot;HoatIPJfC3U?t=1910&quot;,&quot;HoatIPJfC3U?t=1540&quot;,&quot;HoatIPJfC3U?t=720&quot;,&quot;HoatIPJfC3U?t=2425&quot;,&quot;HoatIPJfC3U?t=25&quot;,&quot;HoatIPJfC3U?t=415&quot;,&quot;HoatIPJfC3U?t=70&quot;,&quot;HoatIPJfC3U?t=340&quot;,&quot;zcAKBp-qFP8?t=513&quot;,&quot;zcAKBp-qFP8?t=390&quot;,&quot;zcAKBp-qFP8?t=417&quot;,&quot;zcAKBp-qFP8?t=703&quot;})]" Name="y11" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;Add Queue Items&quot;,&quot;An overview of the ReFramework&quot;,&quot;Assets (Config and Orchestrator)&quot;,&quot;Config&quot;,&quot;End Process&quot;,&quot;Get Transaction Data&quot;,&quot;How to create a log/report in UiPath REFramework&quot;,&quot;How to handle an exception in our Try Catch&quot;,&quot;Initialize All Applications&quot;,&quot;Kill All Processes&quot;,&quot;Process Transaction&quot;,&quot;Running our UiPath REFramework Example&quot;,&quot;The case of the tutorial&quot;,&quot;The initialization state&quot;,&quot;Transitions from Initialization&quot;,&quot;UiPath REFramework overview and introduction&quot;,&quot;Why use ReFramework?&quot;})]" Name="l12" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[New List(Of String)({&quot;LP5y51_n6BY?t=1538&quot;,&quot;wWo-UgBld18?t=190&quot;,&quot;LP5y51_n6BY?t=684&quot;,&quot;LP5y51_n6BY?t=389&quot;,&quot;LP5y51_n6BY?t=3112&quot;,&quot;LP5y51_n6BY?t=1972&quot;,&quot;LP5y51_n6BY?t=3172&quot;,&quot;LP5y51_n6BY?t=2656&quot;,&quot;LP5y51_n6BY?t=1401&quot;,&quot;LP5y51_n6BY?t=1072&quot;,&quot;LP5y51_n6BY?t=2415&quot;,&quot;LP5y51_n6BY?t=2994&quot;,&quot;LP5y51_n6BY?t=188&quot;,&quot;LP5y51_n6BY?t=243&quot;,&quot;LP5y51_n6BY?t=1915&quot;,&quot;LP5y51_n6BY?t=96&quot;,&quot;wWo-UgBld18?t=40&quot;})]" Name="y12" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;Call Transaction / Program&quot;,&quot;Create purchase order&quot;,&quot;Create UiPath Studio project&quot;,&quot;Enable SAP GUI Scripting&quot;,&quot;Extract purchase order code&quot;,&quot;Fill SAP table&quot;,&quot;Fill the vendor&quot;,&quot;Iterate each Excel row&quot;,&quot;SAP Login&quot;,&quot;Start SAP Logon&quot;,&quot;Write purchase order code into Excel&quot;})]" Name="l13" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;Y6Bw4f67Lnk?t=755&quot;,&quot;Y6Bw4f67Lnk?t=2127&quot;,&quot;Y6Bw4f67Lnk?t=238&quot;,&quot;Y6Bw4f67Lnk?t=79&quot;,&quot;Y6Bw4f67Lnk?t=2238&quot;,&quot;Y6Bw4f67Lnk?t=1405&quot;,&quot;Y6Bw4f67Lnk?t=1154&quot;,&quot;Y6Bw4f67Lnk?t=935&quot;,&quot;Y6Bw4f67Lnk?t=562&quot;,&quot;Y6Bw4f67Lnk?t=275&quot;,&quot;Y6Bw4f67Lnk?t=2497&quot;})]" Name="y13" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[New List(Of String)({&quot;Advantages&quot;,&quot;ATM Process Diagram&quot;,&quot;ATM Process Example&quot;,&quot;Disadvantages&quot;,&quot;Execution Order&quot;,&quot;State &amp; Transition&quot;,&quot;State Machine vs. Sequence vs. Flowchart&quot;,&quot;Transition Parts&quot;,&quot;What is State Machine?&quot;})]" Name="l14" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[New List(Of String)({&quot;M1AJs44P1bA?t=739&quot;,&quot;M1AJs44P1bA?t=136&quot;,&quot;M1AJs44P1bA?t=58&quot;,&quot;M1AJs44P1bA?t=829&quot;,&quot;M1AJs44P1bA?t=652&quot;,&quot;M1AJs44P1bA?t=298&quot;,&quot;M1AJs44P1bA?t=867&quot;,&quot;M1AJs44P1bA?t=516&quot;,&quot;M1AJs44P1bA?t=245&quot;})]" Name="y14" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;AddDays get DayofWeek&quot;,&quot;Compare DateTime&quot;,&quot;Compare strings in multiple ways&quot;,&quot;Convert from String to DateTime&quot;,&quot;DateTime to string in multiple ways&quot;,&quot;Examples for Substring functions&quot;,&quot;IndexOf and LastIndexOf&quot;,&quot;Lower Case and Upper Case&quot;,&quot;Resume of all the String function part&quot;,&quot;Split string by character&quot;,&quot;Split string by string&quot;,&quot;SubString working together IndexOf and LastIndexOf&quot;,&quot;Trim&quot;})]" Name="l15" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;yfQ8ucw8Ykk?t=1380&quot;,&quot;yfQ8ucw8Ykk?t=1580&quot;,&quot;yfQ8ucw8Ykk?t=905&quot;,&quot;yfQ8ucw8Ykk?t=1540&quot;,&quot;yfQ8ucw8Ykk?t=1205&quot;,&quot;yfQ8ucw8Ykk?t=35&quot;,&quot;yfQ8ucw8Ykk?t=250&quot;,&quot;yfQ8ucw8Ykk?t=720&quot;,&quot;yfQ8ucw8Ykk?t=1145&quot;,&quot;yfQ8ucw8Ykk?t=405&quot;,&quot;yfQ8ucw8Ykk?t=530&quot;,&quot;yfQ8ucw8Ykk?t=300&quot;,&quot;yfQ8ucw8Ykk?t=765&quot;})]" Name="y15" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;BusinessRuleException&quot;,&quot;ContinueOnError&quot;,&quot;Exception Handling&quot;,&quot;Exception Vs. Error&quot;,&quot;Forcing an Exception&quot;,&quot;Rethrow&quot;,&quot;Retry Scope&quot;,&quot;Throw&quot;,&quot;Try Catch&quot;,&quot;Try Catch Use Case&quot;})]" Name="l16" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;k4r64I7fjzI?t=900&quot;,&quot;WBki1AgKiCU?t=1972&quot;,&quot;WBki1AgKiCU?t=430&quot;,&quot;WBki1AgKiCU?t=29&quot;,&quot;k4r64I7fjzI?t=527&quot;,&quot;WBki1AgKiCU?t=1867&quot;,&quot;WBki1AgKiCU?t=2075&quot;,&quot;WBki1AgKiCU?t=1773&quot;,&quot;WBki1AgKiCU?t=474&quot;,&quot;k4r64I7fjzI?t=88&quot;})]" Name="y16" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;Assets&quot;,&quot;Business Process&quot;,&quot;Connect UiPath Studio with Orchestrator&quot;,&quot;Environment&quot;,&quot;Get Transaction Item&quot;,&quot;Jobs&quot;,&quot;Logs&quot;,&quot;Machine&quot;,&quot;Orchestrator Lifecycle&quot;,&quot;Orchestrator Word&quot;,&quot;Package&quot;,&quot;Process&quot;,&quot;Queue&quot;,&quot;Queue Item Lifecycle&quot;,&quot;Robot&quot;,&quot;Summary&quot;,&quot;Tenant &amp; Folders&quot;,&quot;Triggers&quot;})]" Name="l17" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;419i33PeY14?t=1572&quot;,&quot;419i33PeY14?t=93&quot;,&quot;419i33PeY14?t=530&quot;,&quot;419i33PeY14?t=807&quot;,&quot;419i33PeY14?t=1227&quot;,&quot;419i33PeY14?t=1449&quot;,&quot;419i33PeY14?t=1524&quot;,&quot;419i33PeY14?t=410&quot;,&quot;419i33PeY14?t=1823&quot;,&quot;419i33PeY14?t=48&quot;,&quot;419i33PeY14?t=203&quot;,&quot;419i33PeY14?t=318&quot;,&quot;419i33PeY14?t=864&quot;,&quot;419i33PeY14?t=1020&quot;,&quot;419i33PeY14?t=563&quot;,&quot;419i33PeY14?t=1743&quot;,&quot;419i33PeY14?t=1669&quot;,&quot;419i33PeY14?t=1305&quot;})]" Name="y17" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;Assign Robot &amp; Machine to Folder&quot;,&quot;Configure Robot Account&quot;,&quot;Connect Robot with Orchestrator&quot;,&quot;Create Asset&quot;,&quot;Create Machine Template&quot;,&quot;Create Process in Orchestrator&quot;,&quot;Create Project &amp; Publish&quot;,&quot;Create Queue&quot;,&quot;Create Robot Account&quot;,&quot;Create Tenant&quot;,&quot;Create Trigger&quot;,&quot;Install UiPath Studio Community Edition&quot;,&quot;Login UiPath Cloud Platform&quot;})]" Name="l18" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;ds2I-rw-w8I?t=411&quot;,&quot;ds2I-rw-w8I?t=309&quot;,&quot;ds2I-rw-w8I?t=470&quot;,&quot;ds2I-rw-w8I?t=1128&quot;,&quot;ds2I-rw-w8I?t=198&quot;,&quot;ds2I-rw-w8I?t=682&quot;,&quot;ds2I-rw-w8I?t=549&quot;,&quot;ds2I-rw-w8I?t=1069&quot;,&quot;ds2I-rw-w8I?t=113&quot;,&quot;ds2I-rw-w8I?t=61&quot;,&quot;ds2I-rw-w8I?t=751&quot;,&quot;ds2I-rw-w8I?t=145&quot;,&quot;ds2I-rw-w8I?t=20&quot;})]" Name="y18" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[New List(Of String)({&quot;XDocument&quot;,&quot;XElement&quot;,&quot;XAttribute&quot;})]" Name="l19" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)({&quot;e7DZHR2gCKE?t=77&quot;,&quot;e7DZHR2gCKE?t=449&quot;,&quot;e7DZHR2gCKE?t=845&quot;})]" Name="y19" />
+      <Variable x:TypeArguments="x:String" Name="res1" />
+      <Variable x:TypeArguments="x:String" Name="res2" />
+      <Variable x:TypeArguments="x:Int32" Name="idx" />
+      <Variable x:TypeArguments="x:Int32" Name="idx1" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <uasc:AppendItemToCollection x:TypeArguments="scg:List(x:String)" Collection="[ListOfList]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="708.4,185.6" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_4" Result="[ListOfList]">
+      <uasc:AppendItemToCollection.Items>
+        <scg:List x:TypeArguments="InArgument(scg:List(x:String))" Capacity="32">
+          <InArgument x:TypeArguments="scg:List(x:String)">[l1]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l2]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l3]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l4]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l5]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l6]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l7]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l8]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l9]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l10]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l11]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l12]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l13]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l14]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l15]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l16]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l17]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l18]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[l19]</InArgument>
+        </scg:List>
+      </uasc:AppendItemToCollection.Items>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uasc:AppendItemToCollection>
+    <uasc:AppendItemToCollection x:TypeArguments="scg:List(x:String)" Collection="[ListOfYou]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="708.4,185.6" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_5" Result="[ListOfYou]">
+      <uasc:AppendItemToCollection.Items>
+        <scg:List x:TypeArguments="InArgument(scg:List(x:String))" Capacity="32">
+          <InArgument x:TypeArguments="scg:List(x:String)">[y1]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y2]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y3]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y4]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y5]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y6]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y7]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y8]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y9]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y10]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y11]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y12]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y13]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y14]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y15]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y16]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y17]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y18]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)">[y19]</InArgument>
+        </scg:List>
+      </uasc:AppendItemToCollection.Items>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uasc:AppendItemToCollection>
+    <ui:InputDialog Options="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="708.4,308" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Please select a category" OptionsString="[String.Join(&quot;;&quot;, listC.ToArray())]" Title="Select your area of intrest">
+      <ui:InputDialog.Result>
+        <OutArgument x:TypeArguments="x:String">[res1]</OutArgument>
+      </ui:InputDialog.Result>
+    </ui:InputDialog>
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="[idx]" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="708.4,32" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[listC]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:String">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:String" Name="Item" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="543.6,666.4" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If Condition="[Item.Equals(res1)]" sap:VirtualizedContainerService.HintSize="481.6,544.4" sap2010:WorkflowViewState.IdRef="If_2">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="400,263.6" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="338,69.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Int32">[idx1]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Int32">[idx]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:Break sap:VirtualizedContainerService.HintSize="338,32" sap2010:WorkflowViewState.IdRef="Break_1" />
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap:VirtualizedContainerService.HintSize="400,114.4" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Sequence>
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ForEach>
+    <ui:InputDialog Options="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="708.4,308" sap2010:WorkflowViewState.IdRef="InputDialog_3" IsPassword="False" Label="Please select exactly you question" OptionsString="[String.Join(&quot;;&quot;, ListOfList(idx1).ToArray())]" Title="Select your area">
+      <ui:InputDialog.Result>
+        <OutArgument x:TypeArguments="x:String">[res2]</OutArgument>
+      </ui:InputDialog.Result>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InputDialog>
+    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="[idx]" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="708.4,860.4" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[ListOfList(idx1)]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="Item" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="672.8,725.6" sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If Condition="[Item.Equals(res2)]" sap:VirtualizedContainerService.HintSize="610.8,603.6" sap2010:WorkflowViewState.IdRef="If_3">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="529.2,322.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" sap:VirtualizedContainerService.HintSize="467.2,128.8" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="[&quot;https://youtu.be/&quot;+ListOfYou(idx1)(idx)]">
+                    <ui:OpenBrowser.Body>
+                      <ActivityAction x:TypeArguments="x:Object">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                        </ActivityAction.Argument>
+                      </ActivityAction>
+                    </ui:OpenBrowser.Body>
+                  </ui:OpenBrowser>
+                  <ui:Break sap:VirtualizedContainerService.HintSize="467.2,32" sap2010:WorkflowViewState.IdRef="Break_2" />
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap:VirtualizedContainerService.HintSize="400,114.4" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Sequence>
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+  </Sequence>
+</Activity>
