@@ -1,0 +1,37 @@
+VB.NET code for download with URL
+
+Dim httpRequest As HttpWebRequest = DirectCast(WebRequest.Create("URL of download file"), HttpWebRequest)
+httpRequest.Method = WebRequestMethods.Http.Get
+Dim httpResponse As HttpWebResponse = DirectCast(httpRequest.GetResponse(), HttpWebResponse)
+Dim httpResponseStream As Stream = httpResponse.GetResponseStream()
+Dim doc As Byte()
+Dim ms As MemoryStream = New MemoryStream()
+httpResponseStream.CopyTo(ms)
+doc = ms.ToArray()
+File.WriteAllBytes("C:\\YOURFILENAME.pdf", doc)
+
+VB.NET code wait for large file to be download
+
+	Dim oldfile As String = inlast
+        Dim fi As New System.IO.DirectoryInfo("YOUR Downloads FOLDER")
+        Dim files = fi.GetFiles.ToList
+        Dim last As FileInfo
+        Dim Index As Int32 = 0
+        While (Index < 1000)
+            last = (From file In files Select file Order By file.CreationTime Descending).FirstOrDefault
+            If ((oldfile.CompareTo(last.ToString) <> 0) And last.ToString.EndsWith("YOUR file Extension")) Then
+                Index = 1001
+            Else
+                Threading.Thread.Sleep(1000)
+	        files = fi.GetFiles.ToList
+            End If
+            Index += 1
+        End While
+
+
+
+//getting the last file before start the loop
+Dim fi As New System.IO.DirectoryInfo("YOUR Downloads FOLDER")
+Dim files = fi.GetFiles.ToList
+Dim last = (From file In files Select file Order By file.CreationTime Descending).FirstOrDefault
+outLast = last.ToString
